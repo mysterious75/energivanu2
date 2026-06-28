@@ -1,0 +1,127 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# =============================================================================
+# Energivanu — Data Source Registry
+# =============================================================================
+# Tracks all data sources, their licenses, and commercial safety status.
+# This file is the single source of truth for compliance checking.
+#
+# Usage:
+#   import yaml
+#   with open("config/data_sources.yaml") as f:
+#       sources = yaml.safe_load(f)
+#   commercial_safe = [s for s in sources["sources"] if s["commercial_safe"]]
+# =============================================================================
+
+sources:
+  - name: alibaba_gpu_trace
+    path: data/alibaba_gpu_trace
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    commercial_safe: true
+    citation: |
+      @inproceedings{weng2022mlaas,
+        title={{MLaaS} in the Wild: Workload Analysis and Scheduling
+               in Large-Scale Heterogeneous {GPU} Clusters},
+        author={Weng, Qizhen and Xiao, Wencong and Yu, Yinghao and
+                Wang, Wei and Wang, Cheng and He, Jian and Li, Yong
+                and Zhang, Liping and Lin, Wei and Ding, Yu},
+        booktitle={NSDI '22},
+        year={2022}
+      }
+    description: >
+      Alibaba Cluster Trace GPU v2020 — 6,500+ GPUs across ~1,800 machines,
+      July-August 2020 production data from Alibaba PAI. Contains GPU utilization,
+      memory utilization, temperature, and CPU utilization. Power is inferred
+      from utilization × TDP model. Mix of training and inference workloads
+      including TensorFlow, PyTorch, and Graph-Learn jobs.
+    features:
+      - gpu_util
+      - gpu_memory_util
+      - gpu_temp
+      - cpu_util
+    resolution: per-task
+    size: ~6,500 GPUs, 2 months
+    url: https://github.com/alibaba/clusterdata
+
+  - name: york_h100
+    path: data/real_h100
+    license: CC BY-NC-ND 4.0
+    license_url: https://creativecommons.org/licenses/by-nc-nd/4.0/
+    commercial_safe: false
+    research_only: true
+    citation: >
+      York University High-Resolution AI Data Center Training Workloads Dataset.
+      Licensed under CC BY-NC-ND 4.0 — research use only.
+    description: >
+      Real 8-GPU H100 node telemetry at 20ms resolution from York University.
+      Contains per-GPU power (W), temperature (°C), utilization (%), memory
+      utilization, and CPU utilization for LLM training workloads. High fidelity
+      data but restricted to non-commercial, non-derivative use.
+    features:
+      - gpu_power_W
+      - gpu_temp_C
+      - gpu_utilization_percent
+      - gpu_mem_utilization
+      - cpu_utilization_percent
+    resolution: 20ms
+    size: 8 GPUs (H100), multiple LLM workloads
+    note: >
+      DO NOT include in commercial training pipeline. Use only for research,
+      architecture exploration, and hyperparameter tuning. Model weights
+      trained on this data MUST NOT be distributed.
+
+  - name: kaggle_t4
+    path: data/kaggle_t4
+    license: Proprietary (own data)
+    license_url: null
+    commercial_safe: true
+    citation: null
+    description: >
+      Self-collected GPU telemetry from Kaggle/Colab T4 instances using
+      nvidia-smi polling. Contains per-GPU power, temperature, utilization,
+      and memory metrics. We own all rights — zero license restrictions.
+      Collected via the energivanu telemetry pipeline.
+    features:
+      - gpu_power_W
+      - gpu_temp_C
+      - gpu_utilization_percent
+      - gpu_mem_utilization
+    resolution: 1s (configurable)
+    size: variable (depends on collection duration)
+    collection_method: nvidia-smi polling via energivanu telemetry module
+
+  - name: synthetic
+    path: data/synthetic
+    license: N/A (generated)
+    license_url: null
+    commercial_safe: true
+    citation: null
+    description: >
+      Procedurally generated synthetic GPU power traces using sinusoidal
+      patterns with Gaussian noise. Used for demo, unit testing, and
+      out-of-the-box model distribution. No real hardware data involved.
+    features:
+      - facility_mw (synthetic power trace)
+      - derived features (15 total)
+    resolution: 1s equivalent
+    size: 2,500 samples (2,000 train + 500 val)
+    generation_script: src/energivanu/train_demo.py
+
+# =============================================================================
+# Compliance Rules
+# =============================================================================
+
+compliance:
+  # Training pipelines MUST only use commercial_safe=true sources
+  commercial_training_allowed:
+    - alibaba_gpu_trace
+    - kaggle_t4
+    - synthetic
+
+  # These sources are research-only — NEVER in commercial pipeline
+  research_only:
+    - york_h100
+
+  # Minimum required citation for commercial models
+  required_citations:
+    - alibaba_gpu_trace  # CC BY 4.0 requires attribution

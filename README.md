@@ -176,6 +176,54 @@ Looking to implement Energivanu within your production cluster? We provide dedic
 
 ---
 
+## 📊 Data Strategy
+
+Energivanu uses a **dual data strategy** to ensure all distributed model weights are commercially safe:
+
+### Training Data Sources
+
+| Source | License | Commercial Safe | GPUs | Use Case |
+|--------|---------|----------------|------|----------|
+| **Alibaba GPU Trace v2020** | CC BY 4.0 | ✅ Yes | 6,500 | Primary training data |
+| **Self-collected T4 data** | Own | ✅ Yes | Variable | Supplement + diversity |
+| **Synthetic traces** | N/A | ✅ Yes | N/A | Demo model + testing |
+| York University H100 | CC BY-NC-ND 4.0 | ❌ No | 8 | Research only (not distributed) |
+
+### What This Means
+
+- **Distributed demo model** (`best_model_demo.pt`): Trained on synthetic data only. Zero legal risk.
+- **Commercial model** (`commercial_best.pt`): Trained on Alibaba CC BY 4.0 + own data. Fully commercial-safe.
+- **York/MIT data**: Used only for research and architecture exploration. **Never** included in distributed weights.
+
+### Reproducing Commercial-Safe Training
+
+```bash
+# Train on commercial-safe data only
+python -m energivanu.train_commercial
+
+# Train with specific sources
+python -m energivanu.train_commercial --sources alibaba_gpu_trace kaggle_t4
+
+# Export to ONNX for deployment
+python scripts/export_onnx.py --checkpoint models/checkpoints/commercial_best.pt
+```
+
+See [`config/data_sources.yaml`](config/data_sources.yaml) for the complete data source registry with license details.
+
+---
+
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [MODEL_CARD.md](MODEL_CARD.md) | Model architecture, training data, evaluation metrics, limitations |
+| [docs/DATA_COLLECTION_GUIDE.md](docs/DATA_COLLECTION_GUIDE.md) | Step-by-step guide for collecting GPU telemetry |
+| [docs/LEGAL_FAQ.md](docs/LEGAL_FAQ.md) | Legal FAQ: commercial use, licensing, citations, liability |
+| [PROJECT_STATUS.md](PROJECT_STATUS.md) | Development progress and roadmap |
+| [MASTER_STRATEGY.md](MASTER_STRATEGY.md) | Data strategy executive summary |
+
+---
+
 ## 📄 License
 
 This repository is licensed under the **GNU Affero General Public License v3.0 (AGPLv3)**.
