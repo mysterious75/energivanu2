@@ -1,0 +1,140 @@
+# Energivanu — Default Configuration
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Override any value via environment variable using the prefix ENERGIVANU_
+# and double-underscore separators for nested keys.
+# Example: ENERGIVANU_MODEL__N_FEATURES=15
+
+# ---------------------------------------------------------------------------
+# Model configuration (PEB – Predictive Energy Buffer)
+# ---------------------------------------------------------------------------
+model:
+  n_features: 15
+  seq_len: 30
+  pred_horizon: 10
+  tcn_channels: [32, 64, 128]
+  tcn_kernels: [5, 3, 3]
+  attention_heads: 8
+  attention_dim: 128
+  hidden_dims: [256, 128]
+  n_signal_classes: 3
+  dropout: 0.1
+
+# ---------------------------------------------------------------------------
+# Training configuration
+# ---------------------------------------------------------------------------
+training:
+  batch_size: 64
+  epochs: 100
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  grad_clip_norm: 1.0
+  val_split: 0.15
+  stride: 50
+  num_gpus_target: 200000
+  gpus_per_node: 8
+  checkpoint_dir: "models/checkpoints"
+  checkpoint_name: "best_model.pt"
+
+# ---------------------------------------------------------------------------
+# MPC controller configuration
+# ---------------------------------------------------------------------------
+mpc:
+  horizon_steps: 12
+  step_seconds: 5
+  soc_min: 0.05
+  soc_max: 0.95
+  efficiency: 0.92
+  Q: 100.0
+  R: 0.01
+  S: 0.1
+  grid_target_mw: 200.0
+
+# ---------------------------------------------------------------------------
+# Grid parameters
+# ---------------------------------------------------------------------------
+grid:
+  nominal_frequency_hz: 60.0
+  inertia_constant_s: 4.5
+  ramp_rate_limit_mw_per_min: 5.0
+  facility_current_mw: 200.0
+  frequency_deadband_hz: 0.02
+
+# ---------------------------------------------------------------------------
+# Pricing / tariff configuration
+# ---------------------------------------------------------------------------
+pricing:
+  demand_charge_per_kw_month: 15.0
+  peak_rate_per_kwh: 0.12
+  offpeak_rate_per_kwh: 0.05
+  shoulder_rate_per_kwh: 0.08
+  peak_hours: [14, 15, 16, 17, 18]
+  offpeak_hours: [0, 1, 2, 3, 4, 5, 6]
+  currency: "USD"
+
+# ---------------------------------------------------------------------------
+# Battery energy storage system (BESS)
+# ---------------------------------------------------------------------------
+battery:
+  total_power_mw: 319.2
+  total_capacity_mwh: 655.2
+  chemistry: "LFP"
+  round_trip_efficiency: 0.92
+  max_cycles_per_day: 2
+  min_soc: 0.05
+  max_soc: 0.95
+
+# ---------------------------------------------------------------------------
+# Hardware / BESS interface
+# ---------------------------------------------------------------------------
+hardware:
+  bess_type: "Tesla Megapack"
+  modbus_host: "192.168.1.100"
+  modbus_port: 502
+  modbus_unit_id: 1
+  modbus_timeout_s: 5.0
+  modbus_retry_count: 3
+  modbus_registers:
+    soc_register: 100
+    power_register: 102
+    status_register: 104
+
+# ---------------------------------------------------------------------------
+# Telemetry collection
+# ---------------------------------------------------------------------------
+telemetry:
+  source: "nvidia-smi"
+  collection_interval_s: 1.0
+  gpu_ids: [0, 1, 2, 3, 4, 5, 6, 7]
+  storage_backend: "sqlite"
+  sqlite_path: "data/telemetry.db"
+  csv_path: "data/telemetry.csv"
+  rolling_window_size: 3600
+  simulation_mode: false
+  simulation_num_gpus: 8
+
+# ---------------------------------------------------------------------------
+# Monitoring
+# ---------------------------------------------------------------------------
+monitoring:
+  prometheus_port: 9090
+  prometheus_enabled: true
+  grafana_url: "http://localhost:3000"
+  metrics_prefix: "energivanu"
+  health_check_interval_s: 30
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+logging:
+  level: "INFO"
+  format: "json"
+  log_dir: "logs"
+  max_bytes: 10485760    # 10 MB
+  backup_count: 5
+  console_output: true
+  loggers:
+    model: "energivanu.model"
+    mpc: "energivanu.mpc"
+    telemetry: "energivanu.telemetry"
+    api: "energivanu.api"

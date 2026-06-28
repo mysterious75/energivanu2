@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "energivanu"
+version = "0.1.0"
+description = "ML-based power prediction and battery optimization for AI data centers"
+readme = "README.md"
+license = {text = "AGPL-3.0-or-later"}
+requires-python = ">=3.9"
+authors = [{name = "Energivanu Contributors"}]
+keywords = ["ai", "data-center", "power", "battery", "optimization", "gpu", "machine-learning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+api = ["fastapi>=0.100", "uvicorn>=0.23"]
+dashboard = ["streamlit>=1.25"]
+dev = ["pytest>=7.0", "ruff>=0.1"]
+all = ["energivanu[api,dashboard,dev]"]
+
+[project.scripts]
+energivanu = "energivanu.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/mysterious75/Energivanu"
+Documentation = "https://github.com/mysterious75/Energivanu#readme"
+Repository = "https://github.com/mysterious75/Energivanu"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = ["N806", "N803", "N812", "E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
