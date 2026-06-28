@@ -13,10 +13,15 @@ venv/
 *.pth
 *.onnx
 *.onnx.data
-data/
-models/
 *.log
 .ruff_cache/
 .pytest_cache/
 .mypy_cache/
-__pycache__
+
+# Data files (too large for git)
+data/alibaba/*.csv
+data/alibaba/*.tar.gz
+data/collections/
+*.db
+.openclaw/tmp/
+kaggle.json

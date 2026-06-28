@@ -75,14 +75,16 @@ _NUM_FEATURES: int = 15
 # Column name aliases — different versions of the dataset may use slightly
 # different header names.  Map each canonical name to known aliases.
 _COLUMN_ALIASES: Dict[str, List[str]] = {
-    "instance_id": ["instance_id", "inst_id", "instance", "vid"],
-    "machine_id": ["machine_id", "machine", "mid", "host_id"],
-    "timestamp": ["timestamp", "ts", "time", "datetime"],
-    "cpu_util": ["cpu_util", "cpu_util_percent", "avg_cpu", "cpu"],
+    "instance_id": ["instance_id", "inst_id", "instance", "vid", "inst_name"],
+    "machine_id": ["machine_id", "machine", "mid", "host_id", "worker_name"],
+    "timestamp": ["timestamp", "ts", "time", "datetime", "start_time"],
+    "cpu_util": ["cpu_util", "cpu_util_percent", "avg_cpu", "cpu",
+                 "cpu_usage", "machine_cpu_usr", "machine_cpu"],
     "mem_util": ["mem_util", "mem_util_percent", "avg_mem", "mem"],
-    "gpu_util": ["gpu_util", "gpu_util_percent", "avg_gpu_util", "gpu"],
+    "gpu_util": ["gpu_util", "gpu_util_percent", "avg_gpu_util", "gpu",
+                 "gpu_wrk_util", "machine_gpu"],
     "gpu_mem_util": ["gpu_mem_util", "gpu_mem_util_percent", "avg_gpu_mem",
-                     "gpu_mem", "gpu_memory_util"],
+                     "gpu_mem", "gpu_memory_util", "avg_gpu_wrk_mem"],
 }
 
 
@@ -206,6 +208,18 @@ class AlibabaTraceProcessor:
 
         # Normalize column names
         df = self._normalize_columns(df)
+
+        # Generate synthetic timestamps if missing
+        if "timestamp" not in df.columns:
+            logger.info(
+                "no timestamp column found, generating synthetic timestamps "
+                "(60s intervals)",
+                extra={"path": str(path), "rows": len(df)},
+            )
+            base_ts = pd.Timestamp("2020-01-01")
+            df["timestamp"] = pd.date_range(
+                start=base_ts, periods=len(df), freq="60s"
+            )
 
         # Validate required columns
         required = {"timestamp", "gpu_util"}
