@@ -280,14 +280,14 @@ def build_magazine():
     y += 5
 
     toc_items = [
-        ('03', 'The $47 Billion Problem', "Why AI data centers are the new frontier of energy crisis  -  and what ERCOT's PCLR framework means."),
-        ('04', 'Enter Energivanu', 'The open-source ML toolkit combining power prediction, battery dispatch, and phase staggering.'),
-        ('05', 'Architecture Deep Dive', 'TCN + Attention, MPC, and the 15-feature input system that powers predictions.'),
-        ('06', 'Training on 30 Lakh Rows', 'From 8,438% MAPE to 20.3%  -  the iterative journey on Alibaba real telemetry.'),
-        ('07', 'Verified Performance', 'Real hardware validation. BESS smoothing, peak shaving, phase staggering  -  all verified.'),
-        ('08', 'The Competitive Edge', 'How Energivanu compares to Zeus, Emerald AI, Phaidra, and the landscape.'),
-        ('09', 'Market & Opportunity', '$47B TAM by 2030. Where Energivanu fits in the data center power revolution.'),
-        ('10', 'The Road Ahead', 'Production pilots, DCGM integration, real BESS hardware, and the path forward.'),
+        ('01', 'The $47 Billion Problem', "Why AI data centers are the new frontier of energy crisis  -  and what ERCOT's PCLR framework means."),
+        ('02', 'Enter Energivanu', 'The open-source ML toolkit combining power prediction, battery dispatch, and phase staggering.'),
+        ('03', 'Architecture Deep Dive', 'TCN + Attention, MPC, and the 15-feature input system that powers predictions.'),
+        ('04', 'Training on 30 Lakh Rows', 'From 8,438% MAPE to 20.3%  -  the iterative journey on Alibaba real telemetry.'),
+        ('05', 'Verified Performance', 'Real hardware validation. BESS smoothing, peak shaving, phase staggering  -  all verified.'),
+        ('06', 'The Competitive Edge', 'How Energivanu compares to Zeus, Emerald AI, Phaidra, and the landscape.'),
+        ('07', 'Market & Opportunity', '$47B TAM by 2030. Where Energivanu fits in the data center power revolution.'),
+        ('08', 'The Road Ahead', 'Production pilots, DCGM integration, real BESS hardware, and the path forward.'),
     ]
 
     for num, title, desc in toc_items:
