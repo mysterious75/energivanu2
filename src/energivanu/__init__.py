@@ -3,11 +3,33 @@
 
 __version__ = "0.1.0"
 
-from .data import RealH100Dataset, build_dataloaders
-from .model import EnergivanuPEB, load_model
-from .mpc import MPCController
-from .optimizer import PeakShavingOptimizer
-from .scheduler import PhaseStaggeringScheduler
+# Lazy imports — avoid requiring torch at package import time
+# This allows non-ML modules (bess, grid, mpc, optimizer, scheduler)
+# to work without PyTorch installed.
+
+def __getattr__(name):
+    _lazy_map = {
+        "EnergivanuPEB": ".model",
+        "load_model": ".model",
+        "RealH100Dataset": ".data",
+        "build_dataloaders": ".data",
+        "MPCController": ".mpc",
+        "PeakShavingOptimizer": ".optimizer",
+        "PhaseStaggeringScheduler": ".scheduler",
+        "PyBaMMBattery": ".bess",
+        "BatteryState": ".bess",
+        "BESSModbusServer": ".bess",
+        "OpenADRVEN": ".grid",
+        "GridEvent": ".grid",
+        "GridSignalLevel": ".grid",
+        "ERCOTSCEDClient": ".grid",
+        "SCEDSignal": ".grid",
+    }
+    if name in _lazy_map:
+        import importlib
+        mod = importlib.import_module(_lazy_map[name], __name__)
+        return getattr(mod, name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 __all__ = [
     "EnergivanuPEB",
@@ -17,4 +39,12 @@ __all__ = [
     "MPCController",
     "PeakShavingOptimizer",
     "PhaseStaggeringScheduler",
+    "PyBaMMBattery",
+    "BatteryState",
+    "BESSModbusServer",
+    "OpenADRVEN",
+    "GridEvent",
+    "GridSignalLevel",
+    "ERCOTSCEDClient",
+    "SCEDSignal",
 ]

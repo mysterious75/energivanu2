@@ -12,14 +12,19 @@ Components:
 - :mod:`provenance` — Data lineage tracking
 """
 
-from .h100_processor import (
-    RealH100Dataset,
-    build_dataloaders,
-    create_sequences,
-    load_node_data,
-    scale_to_facility,
-)
-from .alibaba_processor import AlibabaTraceProcessor
+# Lazy imports to avoid requiring torch at package import time
+def __getattr__(name):
+    if name in ("RealH100Dataset", "build_dataloaders", "create_sequences",
+                "load_node_data", "scale_to_facility"):
+        from .h100_processor import (
+            RealH100Dataset, build_dataloaders, create_sequences,
+            load_node_data, scale_to_facility,
+        )
+        return locals()[name]
+    elif name == "AlibabaTraceProcessor":
+        from .alibaba_processor import AlibabaTraceProcessor
+        return AlibabaTraceProcessor
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 __all__ = [
     "RealH100Dataset",

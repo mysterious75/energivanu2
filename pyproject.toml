@@ -32,8 +32,10 @@ dependencies = [
 [project.optional-dependencies]
 api = ["fastapi>=0.100", "uvicorn>=0.23"]
 dashboard = ["streamlit>=1.25"]
+bess = ["pybamm>=23.0", "pymodbus>=3.0"]
+grid = ["pymodbus>=3.0"]
 dev = ["pytest>=7.0", "ruff>=0.1"]
-all = ["energivanu[api,dashboard,dev]"]
+all = ["energivanu[api,dashboard,bess,grid,dev]"]
 
 [project.scripts]
 energivanu = "energivanu.cli:main"
