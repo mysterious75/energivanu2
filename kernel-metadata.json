@@ -1,19 +1,18 @@
 {
-  "id": "vedkumr/energivanu-gap-validation",
-  "id_no": 125243979,
-  "title": "Energivanu Gap Validation",
+  "id": "vedkumr/energivanu-alibaba-training",
+  "id_no": 125224412,
+  "title": "Energivanu Alibaba Training",
   "code_file": "energivanu-gap-validation.py",
   "language": "python",
   "kernel_type": "script",
-  "is_private": false,
+  "is_private": true,
   "enable_gpu": true,
   "enable_tpu": false,
   "enable_internet": true,
-  "keywords": [
-    "gpu",
-    "energy"
+  "keywords": [],
+  "dataset_sources": [
+    "vedkumr/mit-supercloud-real2"
   ],
-  "dataset_sources": [],
   "kernel_sources": [],
   "competition_sources": [],
   "model_sources": [],
