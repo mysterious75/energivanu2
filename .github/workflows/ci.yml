@@ -52,5 +52,11 @@ jobs:
       - name: Install package
         run: pip install -e ".[dev]"
 
+      - name: Install test dependencies
+        run: pip install pytest-timeout
+
       - name: Run tests
-        run: pytest tests/ -v --timeout=60
+        run: pytest tests/ -v --timeout=60 --tb=short 2>&1 || true
+
+      - name: Check test results
+        run: pytest tests/ -v --timeout=60 --tb=short
