@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-06-29T01:14:50.581112",
+  "status": "COMPLETE",
+  "device": "cuda",
+  "gpu": "Tesla P100-PCIE-16GB",
+  "data_source": "Alibaba GPU Trace 2020 (CC BY 4.0)",
+  "data_rows": 300000,
+  "train_samples": 25496,
+  "val_samples": 4500,
+  "model_params": 338252,
+  "epochs": 50,
+  "best_val_loss": 88.000515,
+  "best_val_mape": 75.4,
+  "training_time_s": 95
+}
