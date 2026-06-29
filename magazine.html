@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energivanu Insights | Presentation</title>
+    <title>Energivanu Insights | Editorial Lookbook</title>
     
-    <!-- Google Fonts for Modern Sans-Serif -->
+    <!-- Google Fonts for Luxury Editorial Aesthetic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         :root {
-            --bg-color: #08090a;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --text-primary: #ffffff;
-            --text-secondary: #8a8f98;
-            --accent: #5e6ad2;
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --bg-ivory: #F7F5F1;
+            --bg-dark: #111111;
+            --text-dark: #111111;
+            --text-light: #F7F5F1;
+            --text-gray: #7A7A7A;
+            --accent-gold: #C7A76B;
+            
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-metrics: 'Space Grotesk', sans-serif;
         }
 
         * {
@@ -29,16 +34,18 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background-color: #0b0c0e; /* dark wrapper to contrast A4 spreads */
+            color: var(--text-dark);
             font-family: var(--font-body);
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            align-items: center;
+            padding-top: 100px;
+            padding-bottom: 100px;
         }
 
-        /* --- NAVBAR --- */
+        /* --- NAVBAR (Modern Minimalist Dark) --- */
         nav {
             position: fixed;
             top: 0;
@@ -48,9 +55,9 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(8, 9, 10, 0.8);
+            background: rgba(17, 17, 17, 0.9);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .logo {
             font-family: var(--font-display);
@@ -58,7 +65,7 @@
             font-weight: 700;
             letter-spacing: -0.5px;
             text-decoration: none;
-            color: var(--text-primary);
+            color: var(--text-light);
         }
         .nav-links {
             display: flex;
@@ -66,52 +73,246 @@
             align-items: center;
         }
         .nav-links a {
-            color: var(--text-secondary);
+            color: var(--text-gray);
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
             transition: color 0.3s ease;
         }
         .nav-links a:hover {
-            color: var(--text-primary);
+            color: var(--text-light);
         }
 
-        /* --- PRESENTATION FEED --- */
-        main {
-            flex-grow: 1;
+        /* --- MAGAZINE CONTAINER --- */
+        .magazine-wrapper {
+            max-width: 1200px;
+            width: 90vw;
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+        }
+
+        /* --- A4 LANDSCAPE SPREAD --- */
+        .spread {
+            background-color: var(--bg-ivory);
+            width: 100%;
+            aspect-ratio: 1.414; /* A4 Landscape */
+            border-radius: 4px;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.8);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dark Spread Modifier */
+        .spread.spread-dark {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        /* Left and Right Page Panels */
+        .page-panel {
+            padding: 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        .page-left {
+            border-right: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .spread-dark .page-left {
+            border-right: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        /* Bottom page numbers */
+        .page-number {
+            font-family: var(--font-metrics);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-gray);
+            letter-spacing: 2px;
+        }
+        .page-left .page-number {
+            text-align: left;
+        }
+        .page-right .page-number {
+            text-align: right;
+        }
+
+        /* --- CONTENT STYLING --- */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        .champagne {
+            color: var(--accent-gold);
+        }
+
+        .editorial-text {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            max-width: 420px;
+        }
+
+        .spread-dark .editorial-text {
+            color: #b5b5b5;
+        }
+
+        /* Full Bleed Image Coverages */
+        .full-bleed-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .overlay-dark {
+            position: absolute;
+            inset: 0;
+            background: rgba(17, 17, 17, 0.85);
+            z-index: 2;
+        }
+
+        /* Infographics Flow */
+        .flow-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4rem;
-            padding: 120px 5% 100px 5%;
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .slide-container {
-            width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            border: 1px solid var(--border-color);
-            background-color: #111215;
-            aspect-ratio: 2 / 1;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .slide-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-container img {
-            width: 100%;
+            justify-content: center;
+            gap: 1.5rem;
             height: 100%;
-            object-fit: contain;
-            display: block;
+        }
+        .flow-node {
+            font-family: var(--font-metrics);
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border: 1px solid var(--border-color);
+            background: rgba(0,0,0,0.02);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+        .spread-dark .flow-node {
+            background: rgba(255,255,255,0.02);
+            border-color: rgba(255,255,255,0.08);
+        }
+        .flow-arrow {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        /* Luxury Cards */
+        .luxury-cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: center;
+            height: 100%;
+        }
+        .luxury-card {
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 1.5rem;
+        }
+        .luxury-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        .luxury-card span {
+            font-family: var(--font-metrics);
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            letter-spacing: 1px;
+        }
+
+        /* Table Matrix */
+        .editorial-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+        .editorial-matrix th, .editorial-matrix td {
+            padding: 1.2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+        }
+        .editorial-matrix th {
+            font-family: var(--font-metrics);
+            color: var(--text-gray);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .editorial-matrix td {
+            font-weight: 500;
+        }
+
+        /* Big Editorial Metrics */
+        .big-metric-num {
+            font-family: var(--font-display);
+            font-size: 6rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            line-height: 1;
+        }
+        
+        /* Roadmap Timeline */
+        .roadmap-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            height: 100%;
+            border-left: 1px solid var(--accent-gold);
+            padding-left: 2rem;
+            margin-left: 2rem;
+        }
+        .roadmap-node {
+            position: relative;
+        }
+        .roadmap-node::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.3rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+        }
+        .roadmap-year {
+            font-family: var(--font-metrics);
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+        .roadmap-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* --- RESPONSIVE MODIFICATION --- */
+        @media (max-width: 900px) {
+            .spread {
+                aspect-ratio: auto;
+                grid-template-columns: 1fr;
+            }
+            .page-panel {
+                padding: 3rem 2rem;
+            }
+            .page-left {
+                border-right: none;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
         }
 
     </style>
@@ -123,38 +324,348 @@
         <div class="nav-links">
             <a href="index.html">Equipment</a>
             <a href="whitepaper.html">Whitepaper</a>
-            <a href="magazine.html" style="color: var(--text-primary);">Magazine</a>
+            <a href="magazine.html" style="color: var(--text-light);">Magazine</a>
             <a href="https://github.com/mysterious75/energivanu2">GitHub</a>
         </div>
     </nav>
 
-    <main>
-        <div class="slide-container"><img src="magazine/assets/slide_01.png" alt="Slide 01"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_02.png" alt="Slide 02"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_03.png" alt="Slide 03"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_04.png" alt="Slide 04"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_05.png" alt="Slide 05"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_06.png" alt="Slide 06"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_07.png" alt="Slide 07"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_08.png" alt="Slide 08"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_09.png" alt="Slide 09"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_10.png" alt="Slide 10"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_11.png" alt="Slide 11"></div>
-        <div class="slide-container"><img src="magazine/assets/slide_12.png" alt="Slide 12"></div>
-    </main>
+    <div class="magazine-wrapper">
+
+        <!-- SPREAD 01: COVER (Dark) -->
+        <div class="spread spread-dark">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="AI Datacenter" class="full-bleed-img">
+            <div class="overlay-dark"></div>
+            
+            <div class="page-panel page-left">
+                <div>
+                    <h1 style="font-size: 3.5rem; letter-spacing: 2px;">ENERGIVANU<br><span class="champagne">INSIGHTS</span></h1>
+                </div>
+                <div class="page-number">ISSUE 01</div>
+            </div>
+            
+            <div class="page-panel page-right" style="justify-content: flex-end; align-items: flex-end; text-align: right;">
+                <div style="max-width: 400px; margin-bottom: 4rem;">
+                    <p style="font-size: 0.9rem; letter-spacing: 2px; color: var(--accent-gold); margin-bottom: 1rem;">THE OPEN-SOURCE ENGINE THAT COULD SAVE</p>
+                    <h2 style="font-size: 3rem; font-weight: 400; margin-bottom: 1.5rem;">$47 BILLION</h2>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; letter-spacing: 1px;">IN DATA CENTER POWER</p>
+                </div>
+                <div class="page-number">SPECIAL EDITION / JUNE 2026</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 02: OUR VISION (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left" style="padding: 0; overflow: hidden; position: relative;">
+                <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="GPU macro" class="full-bleed-img">
+            </div>
+            
+            <div class="page-panel page-right">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Our Vision</h3>
+                    <h2 style="font-size: 2.8rem; font-weight: 400; margin-bottom: 2rem; line-height: 1.2;">Artificial Intelligence will not be compute limited.<br><span class="champagne">It will be energy limited.</span></h2>
+                    <p class="editorial-text">As models expand and processor counts escalate, power capability becomes the bounding constraint of artificial intelligence. Energivanu redefines cluster scheduling, matching grid signals with load optimization in sub-minute telemetry loops.</p>
+                </div>
+                <div class="page-number">SPREAD 02</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 03: THE $47B PROBLEM (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">The Challenge</h3>
+                    <h2 style="font-size: 3.5rem; font-weight: 600; margin-bottom: 2rem;">THE<br><span class="champagne">$47 BILLION</span><br>PROBLEM</h2>
+                    <p class="editorial-text">Global data centers face massive interconnection queues due to transmission limits. Grid operators require verifiable flexibility, making standard constant-load operations obsolete.</p>
+                </div>
+                <div class="page-number">SPREAD 03</div>
+            </div>
+
+            <div class="page-panel page-right" style="padding: 0; overflow: hidden; position: relative;">
+                <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Transmission Grid" class="full-bleed-img">
+            </div>
+        </div>
+
+        <!-- SPREAD 04: ENTER ENERGIVANU (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">The Solution</h3>
+                    <h2 style="font-size: 3.5rem; font-weight: 600; margin-bottom: 2rem;">ENTER<br><span class="champagne">ENERGIVANU</span></h2>
+                    <p class="editorial-text">An open-source load flexibility execution engine. Energivanu integrates grid signal ingestion, battery energy storage dispatch (BESS), and collective communication scheduling into one automated process loop.</p>
+                </div>
+                <div class="page-number">SPREAD 04</div>
+            </div>
+
+            <div class="page-panel page-right" style="background-color: #faf9f6;">
+                <div class="flow-container">
+                    <div class="flow-node">GRID TELEMETRY</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">POWER PREDICTION</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">MPC OPTIMIZATION</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">BATTERY DISPATCH</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node">GPU CLUSTER CONTROL</div>
+                </div>
+                <div class="page-number">FLOW ENGINE</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 05: THREE ENGINES (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Architecture</h3>
+                    <h2 style="font-size: 3.5rem; font-weight: 600; margin-bottom: 2rem;">THREE ENGINES.<br><span class="champagne">ONE PIPELINE.</span></h2>
+                    <p class="editorial-text">A unified layout designed to execute grid signals, schedule batteries, and stagger GPU training workloads simultaneously.</p>
+                </div>
+                <div class="page-number">SPREAD 05</div>
+            </div>
+
+            <div class="page-panel page-right">
+                <div class="luxury-cards-grid">
+                    <div class="luxury-card">
+                        <h4>Power Prediction Engine</h4>
+                        <span>613K Parameters • TCN + Attention</span>
+                    </div>
+                    <div class="luxury-card">
+                        <h4>Battery Dispatch Engine</h4>
+                        <span>MPC Convex Solver • Trajectory tracking</span>
+                    </div>
+                    <div class="luxury-card">
+                        <h4>Phase Coordination Engine</h4>
+                        <span>59.0% Variance Staggering • Zero training loss</span>
+                    </div>
+                </div>
+                <div class="page-number">COMPONENTS</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 06: NEURAL ARCHITECTURE (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Neural Network</h3>
+                    <h2 style="font-size: 3.5rem; font-weight: 600; margin-bottom: 2rem;">THE<br><span class="champagne">NEURAL</span><br>ENGINE</h2>
+                    <p class="editorial-text">Dual-head regression and classification. Dilated convolutions capture short-term load spikes while multi-head attention predicts cyclical GPU steps.</p>
+                </div>
+                <div class="page-number">SPREAD 06</div>
+            </div>
+
+            <div class="page-panel page-right" style="background-color: #faf9f6; justify-content: center; align-items: center;">
+                <svg width="250" height="250" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="80" stroke="#C7A76B" stroke-width="1" stroke-dasharray="4 4"/>
+                    <rect x="70" y="40" width="60" height="20" rx="3" fill="#111111"/>
+                    <text x="100" y="52" fill="#F7F5F1" font-size="7" font-family="monospace" text-anchor="middle">TCN Layers</text>
+                    
+                    <rect x="70" y="90" width="60" height="20" rx="3" fill="#111111"/>
+                    <text x="100" y="102" fill="#F7F5F1" font-size="7" font-family="monospace" text-anchor="middle">Attention Block</text>
+                    
+                    <rect x="50" y="140" width="45" height="20" rx="3" fill="#C7A76B"/>
+                    <text x="72" y="152" fill="#111111" font-size="6" font-family="monospace" text-anchor="middle">Power Output</text>
+                    
+                    <rect x="105" y="140" width="45" height="20" rx="3" fill="#C7A76B"/>
+                    <text x="127" y="152" fill="#111111" font-size="6" font-family="monospace" text-anchor="middle">BESS Command</text>
+                    
+                    <path d="M100 60V90M72.5 110L72.5 140M127.5 110L127.5 140" stroke="#C7A76B" stroke-width="1.5"/>
+                </svg>
+                <div class="page-number">MODEL SCHEMATIC</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 07: TRAINING JOURNEY (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Training Progress</h3>
+                    <div class="big-metric-num">20.3%</div>
+                    <h4 style="font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem;">Final Validation MAPE</h4>
+                    <p class="editorial-text">Obtained after training on 3.0 Million raw telemetry sensor sequences from the Alibaba GPU Trace 2020 dataset.</p>
+                </div>
+                <div class="page-number">SPREAD 07</div>
+            </div>
+
+            <div class="page-panel page-right" style="justify-content: center;">
+                <canvas id="trainChart" style="max-height: 220px;"></canvas>
+                <div class="page-number">ERROR REGRESSION</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 08: VERIFIED PERFORMANCE (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Validation</h3>
+                    <h2 style="font-size: 3.5rem; font-weight: 600; margin-bottom: 2rem;">VERIFIED<br><span class="champagne">PERFORMANCE</span></h2>
+                    <p class="editorial-text">Every metric was verified on actual Tesla P100 hardware systems under synthetic testing conditions.</p>
+                </div>
+                <div class="page-number">SPREAD 08</div>
+            </div>
+
+            <div class="page-panel page-right" style="justify-content: space-around;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 1rem;">
+                    <span style="font-family: var(--font-metrics); font-size: 2.2rem; font-weight: 700; color: var(--accent-gold);">30.0%</span>
+                    <span style="text-align: right; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;">GRID SMOOTHING</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 1rem;">
+                    <span style="font-family: var(--font-metrics); font-size: 2.2rem; font-weight: 700; color: var(--accent-gold);">59.0%</span>
+                    <span style="text-align: right; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;">VARIANCE REDUCTION</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem;">
+                    <span style="font-family: var(--font-metrics); font-size: 2.2rem; font-weight: 700; color: var(--accent-gold);">10.5%</span>
+                    <span style="text-align: right; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;">PEAK SHAVING</span>
+                </div>
+                <div class="page-number">EMPIRICAL RESULTS</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 09: COMPETITIVE MATRIX (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Comparison</h3>
+                    <h2 style="font-size: 3.5rem; font-weight: 600; margin-bottom: 2rem;">THE<br><span class="champagne">COMPETITIVE</span><br>EDGE</h2>
+                    <p class="editorial-text">A comparison overview against alternative facility management tools in the computing sector.</p>
+                </div>
+                <div class="page-number">SPREAD 09</div>
+            </div>
+
+            <div class="page-panel page-right">
+                <table class="editorial-matrix">
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>ML</th>
+                            <th>BESS</th>
+                            <th>GPU</th>
+                            <th>Grid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="color: var(--accent-gold); font-weight: bold;">
+                            <td>Energivanu</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr>
+                            <td>Zeus</td>
+                            <td>✓</td>
+                            <td>✗</td>
+                            <td>✓</td>
+                            <td>✗</td>
+                        </tr>
+                        <tr>
+                            <td>Emerald</td>
+                            <td>✓</td>
+                            <td>✗</td>
+                            <td>✗</td>
+                            <td>✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="page-number">CAPABILITY COMPARISON</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 10: MARKET OPPORTUNITY (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Market TAM</h3>
+                    <div class="big-metric-num">$47B</div>
+                    <h4 style="font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem;">Total Addressable Market</h4>
+                    <p class="editorial-text">Estimated aggregate spending on data center load flexibility and battery management configurations by 2030.</p>
+                </div>
+                <div class="page-number">SPREAD 10</div>
+            </div>
+
+            <div class="page-panel page-right" style="justify-content: center; align-items: center;">
+                <div style="width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(var(--accent-gold) 0% 70%, #eae7e0 70% 100%); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <div style="width: 110px; height: 110px; border-radius: 50%; background: var(--bg-ivory); display: flex; align-items: center; justify-content: center; font-family: var(--font-metrics); font-weight: bold; font-size: 1.1rem;">70% PCLR</div>
+                </div>
+                <div class="page-number">GRID INFLUENCE</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 11: ROADMAP (Ivory) -->
+        <div class="spread">
+            <div class="page-panel page-left">
+                <div>
+                    <h3 class="champagne" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Future Work</h3>
+                    <h2 style="font-size: 3.5rem; font-weight: 600; margin-bottom: 2rem;">ROADMAP TO<br><span class="champagne">COMPLIANCE</span></h2>
+                    <p class="editorial-text">Our roadmap highlights the upcoming milestones for scaling the system to production clusters.</p>
+                </div>
+                <div class="page-number">SPREAD 11</div>
+            </div>
+
+            <div class="page-panel page-right">
+                <div class="roadmap-timeline">
+                    <div class="roadmap-node">
+                        <div class="roadmap-year">2026</div>
+                        <div class="roadmap-title">University Pilot Deployments</div>
+                    </div>
+                    <div class="roadmap-node">
+                        <div class="roadmap-year">2027</div>
+                        <div class="roadmap-title">DCGM Telemetry & Megapack Client</div>
+                    </div>
+                    <div class="roadmap-node">
+                        <div class="roadmap-year">2028</div>
+                        <div class="roadmap-title">Aggregated Fleet Management Scaling</div>
+                    </div>
+                </div>
+                <div class="page-number">MILESTONES</div>
+            </div>
+        </div>
+
+        <!-- SPREAD 12: FINAL SPREAD (Dark) -->
+        <div class="spread spread-dark">
+            <div class="page-panel page-left" style="justify-content: center;">
+                <h2 style="font-size: 2.8rem; font-weight: 400; line-height: 1.3; max-width: 480px;">THE FUTURE OF<br>ARTIFICIAL INTELLIGENCE WILL NOT BE COMPUTE LIMITED.<br><span class="champagne">IT WILL BE ENERGY LIMITED.</span></h2>
+            </div>
+            
+            <div class="page-panel page-right" style="justify-content: flex-end; align-items: flex-end; text-align: right;">
+                <div style="margin-bottom: 4rem;">
+                    <h4 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; font-family: var(--font-display);">Ved Kumar</h4>
+                    <p style="font-family: var(--font-metrics); font-size: 0.75rem; letter-spacing: 2px; color: var(--accent-gold);">CREATOR & LEAD DEVELOPER</p>
+                </div>
+                <div class="page-number">github.com/mysterious75/energivanu2</div>
+            </div>
+        </div>
+
+    </div>
 
     <script>
-        // Intersection Observer for scroll-fade animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // trigger animation only once
+        // Setup Training Chart
+        const ctx = document.getElementById('trainChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['v1', 'v2', 'v3', 'v4 (Raw)'],
+                datasets: [{
+                    label: 'Validation Loss (MSE)',
+                    data: [8438, 75.4, 37.28, 20.3],
+                    borderColor: '#C7A76B',
+                    borderWidth: 2,
+                    backgroundColor: 'rgba(199, 167, 107, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { ticks: { color: '#7A7A7A' }, grid: { display: false } },
+                    y: { type: 'logarithmic', ticks: { color: '#7A7A7A' }, grid: { color: 'rgba(0,0,0,0.03)' } }
+                },
+                plugins: {
+                    legend: { display: false }
                 }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.slide-container').forEach(el => observer.observe(el));
+            }
+        });
     </script>
 </body>
 </html>
