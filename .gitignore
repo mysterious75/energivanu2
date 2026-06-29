@@ -45,3 +45,12 @@ validation_output/
 kaggle_results/validation_output/
 .openclaw/
 *.csv
+
+# Ignore all markdown files
+*.md
+**/*.md
+
+# Except main documentation
+!README.md
+!WHITEPAPER.md
+!docs/WHITEPAPER.md
