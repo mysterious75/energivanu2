@@ -4,7 +4,8 @@
   <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue" alt="Python Support"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-green" alt="License"></a>
   <a href="src/energivanu/model.py"><img src="https://img.shields.io/badge/parameters-613K-blueviolet" alt="Model Size"></a>
-  <a href="https://github.com/mysterious75/Energivanu/actions"><img src="https://img.shields.io/github/actions/workflow/status/mysterious75/Energivanu/ci.yml?branch=main" alt="CI Status"></a>
+  <a href="magazine/Energivanu_Insights_Magazine.pdf"><img src="https://img.shields.io/badge/magazine-pdf-red" alt="Magazine"></a>
+  <a href="magazine/LEGAL_COMPLIANCE.md"><img src="https://img.shields.io/badge/legal-compliant-brightgreen" alt="Legal"></a>
 </p>
 
 <p align="center">
@@ -86,6 +87,42 @@ Energivanu does not claim to be the first or only project in GPU data center pow
 **Where Energivanu differs:** The unique combination of (1) TCN+attention power forecasting, (2) native BESS MPC dispatch, and (3) All-Reduce phase staggering in a single open-source package. Individual components exist elsewhere, but this specific integration does not.
 
 **Where we are not:** Energivanu is not a production-ready facility management system, not a PCLR compliance toolkit, and not validated on real BESS hardware.
+
+---
+
+## 📁 Project Structure
+
+```
+energivanu2/
+├── src/energivanu/              # Core Python package
+│   ├── model.py                 # TCN + Attention power prediction model
+│   ├── mpc.py                   # Model Predictive Controller (BESS)
+│   ├── optimizer.py             # Peak shaving optimizer
+│   ├── scheduler.py             # Phase-staggering scheduler
+│   ├── api.py                   # FastAPI REST server
+│   ├── bess/                    # Battery simulation (PyBaMM)
+│   ├── grid/                    # Grid integration (OpenADR, ERCOT SCED)
+│   ├── telemetry/               # GPU telemetry collection
+│   └── data/                    # Data processing pipeline
+├── magazine/                    # Professional magazine publication
+│   ├── Energivanu_Insights_Magazine.pdf   # 10-page investor magazine
+│   ├── Energivanu_Insights_Magazine.docx  # Editable Word version
+│   ├── LEGAL_COMPLIANCE.md     # Full legal audit
+│   ├── build_magazine.py       # PDF generation script
+│   ├── build_docx.py           # DOCX generation script
+│   ├── generate_charts.py      # Chart generation (matplotlib)
+│   └── assets/                 # Generated chart images
+├── kaggle/                      # Kaggle notebooks
+├── alibaba-training/            # Alibaba GPU Trace training docs
+├── models/                      # Model checkpoints
+├── tests/                       # Test suite
+├── docs/                        # Documentation
+├── WHITEPAPER.md                # Technical whitepaper
+├── TECHNICAL_DOCUMENTATION.md   # Full technical docs
+├── MASTER_STRATEGY.md           # Data strategy summary
+├── MODEL_CARD.md                # Model card (Google format)
+└── README.md                    # This file
+```
 
 ---
 
@@ -233,6 +270,58 @@ See [`config/data_sources.yaml`](config/data_sources.yaml) for the complete data
 
 ---
 
+## 📰 Energivanu Insights — Professional Magazine
+
+A 10-page professional magazine publication for VC/angel investor presentations, LinkedIn, and public outreach.
+
+| File | Format | Size | Description |
+|------|--------|------|-------------|
+| [`magazine/Energivanu_Insights_Magazine.pdf`](magazine/Energivanu_Insights_Magazine.pdf) | PDF | ~1 MB | 10-page magazine with charts, data visualizations, professional layout |
+| [`magazine/Energivanu_Insights_Magazine.docx`](magazine/Energivanu_Insights_Magazine.docx) | DOCX | ~1 MB | Editable Word version for customization |
+| [`magazine/LEGAL_COMPLIANCE.md`](magazine/LEGAL_COMPLIANCE.md) | Markdown | — | Full legal audit of all tools, fonts, data, and content |
+
+### Magazine Contents
+
+| Page | Section |
+|------|--------|
+| 01 | Cover — "The Open-Source Engine That Could Save $47B in Data Center Power" |
+| 02 | Table of Contents |
+| 03 | The $47 Billion Problem — ERCOT PCLR, grid crisis, market data |
+| 04 | Enter Energivanu — 3 engines, 613K params, metric cards |
+| 05 | Architecture Deep Dive — TCN+Attention, MPC, 15 features |
+| 06 | Training on 30 Lakh Rows — 8,438% to 20.3% MAPE journey |
+| 07 | Verified Performance — Real hardware validation, BESS charts |
+| 08 | Competitive Edge — Radar chart vs Zeus, Emerald AI, Phaidra |
+| 09 | Market & Opportunity — $47B TAM, revenue model, customers |
+| 10 | The Road Ahead — Roadmap, vision, founder profile |
+
+### Included Visualizations (9 Professional Charts)
+
+- Training progression (99.8% error reduction)
+- BESS before/after grid smoothing
+- Competitive capability radar chart
+- Market opportunity projection (2024-2030)
+- System architecture diagram
+- Response timeline (21s vs 600s PCLR)
+- 15-feature input architecture
+- Alibaba training loss curve
+- Data pipeline visualization
+
+### Regenerating the Magazine
+
+```bash
+cd magazine
+python3 generate_charts.py    # Generate all chart images
+python3 build_magazine.py      # Build PDF
+python3 build_docx.py          # Build DOCX
+```
+
+### Legal Status
+
+All components (libraries, fonts, charts, data citations, content) are **fully cleared for commercial use**. See [`magazine/LEGAL_COMPLIANCE.md`](magazine/LEGAL_COMPLIANCE.md) for the complete audit.
+
+---
+
 ## 📚 Documentation
 
 | Document | Description |
@@ -242,6 +331,10 @@ See [`config/data_sources.yaml`](config/data_sources.yaml) for the complete data
 | [docs/LEGAL_FAQ.md](docs/LEGAL_FAQ.md) | Legal FAQ: commercial use, licensing, citations, liability |
 | [PROJECT_STATUS.md](PROJECT_STATUS.md) | Development progress and roadmap |
 | [MASTER_STRATEGY.md](MASTER_STRATEGY.md) | Data strategy executive summary |
+| [WHITEPAPER.md](WHITEPAPER.md) | Technical whitepaper — PCLR compliance architecture |
+| [TECHNICAL_DOCUMENTATION.md](TECHNICAL_DOCUMENTATION.md) | Complete technical documentation |
+| [EXECUTION_MASTERPLAN.md](EXECUTION_MASTERPLAN.md) | Development execution plan |
+| [magazine/LEGAL_COMPLIANCE.md](magazine/LEGAL_COMPLIANCE.md) | Magazine legal compliance audit |
 
 ---
 
