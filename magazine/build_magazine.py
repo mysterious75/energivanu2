@@ -32,11 +32,8 @@ class MagazinePDF(FPDF):
         super().__init__('P', 'mm', 'A4')
         self.set_auto_page_break(auto=False)
         self.set_margins(0, 0, 0)
-        # Register Unicode fonts
-        self.add_font('LibSans', '', os.path.join(FONT_DIR, 'LiberationSans-Regular.ttf'))
-        self.add_font('LibSans', 'B', os.path.join(FONT_DIR, 'LiberationSans-Bold.ttf'))
-        self.add_font('LibSans', 'I', os.path.join(FONT_DIR, 'LiberationSans-Italic.ttf'))
-        self.add_font('LibSans', 'BI', os.path.join(FONT_DIR, 'LiberationSans-BoldItalic.ttf'))
+        # Use default helvetica instead of custom LiberationSans to avoid missing TTF errors
+        self.set_font('helvetica', '', 10)
 
     def dark_page(self):
         self.add_page()
@@ -48,7 +45,7 @@ class MagazinePDF(FPDF):
         self.set_fill_color(*RED)
         self.rect(0, 0, 210, 3, 'F')
         # Section name
-        self.set_font('LibSans', 'B', 7)
+        self.set_font('helvetica', 'B', 7)
         self.set_text_color(*RED)
         self.set_xy(20, 8)
         self.cell(0, 5, section_name.upper(), ln=False)
@@ -63,7 +60,7 @@ class MagazinePDF(FPDF):
     def footer_bar(self):
         self.set_draw_color(40, 40, 40)
         self.line(20, 287, 190, 287)
-        self.set_font('LibSans', '', 6)
+        self.set_font('helvetica', '', 6)
         self.set_text_color(50, 50, 50)
         self.set_xy(20, 289)
         self.cell(80, 4, 'ENERGIVANU INSIGHTS  -  ENERGY & AI', ln=False)
@@ -71,12 +68,12 @@ class MagazinePDF(FPDF):
         self.cell(80, 4, 'ENERGIVANU', ln=False, align='R')
 
     def section_title(self, title, subtitle=''):
-        self.set_font('LibSans', 'B', 26)
+        self.set_font('helvetica', 'B', 26)
         self.set_text_color(*WHITE)
         self.set_xy(20, 20)
         self.multi_cell(170, 10, title, align='L')
         if subtitle:
-            self.set_font('LibSans', '', 11)
+            self.set_font('helvetica', '', 11)
             self.set_text_color(*GRAY)
             self.set_xy(20, self.get_y() + 3)
             self.multi_cell(170, 6, subtitle, align='L')
@@ -88,7 +85,7 @@ class MagazinePDF(FPDF):
 
     def heading2(self, text, y=None):
         if y: self.set_y(y)
-        self.set_font('LibSans', 'B', 15)
+        self.set_font('helvetica', 'B', 15)
         self.set_text_color(*WHITE)
         self.set_x(20)
         self.cell(170, 8, text, ln=True)
@@ -96,7 +93,7 @@ class MagazinePDF(FPDF):
 
     def heading3(self, text, y=None):
         if y: self.set_y(y)
-        self.set_font('LibSans', 'B', 11)
+        self.set_font('helvetica', 'B', 11)
         self.set_text_color(*CYAN)
         self.set_x(20)
         self.cell(170, 6, text, ln=True)
@@ -104,7 +101,7 @@ class MagazinePDF(FPDF):
 
     def body_text(self, text, y=None, indent=20, width=170):
         if y: self.set_y(y)
-        self.set_font('LibSans', '', 9.5)
+        self.set_font('helvetica', '', 9.5)
         self.set_text_color(200, 200, 200)
         self.set_x(indent)
         self.multi_cell(width, 5.2, text, align='J')
@@ -114,7 +111,7 @@ class MagazinePDF(FPDF):
         if y: self.set_y(y)
         # Red left border
         y_start = self.get_y()
-        self.set_font('LibSans', '', 11)
+        self.set_font('helvetica', '', 11)
         self.set_text_color(240, 240, 240)
         self.set_x(25)
         self.multi_cell(160, 6, text, align='J')
@@ -128,17 +125,17 @@ class MagazinePDF(FPDF):
         self.set_draw_color(40, 40, 50)
         self.rect(x, y, w, h, 'FD')
         # Value
-        self.set_font('LibSans', 'B', 20)
+        self.set_font('helvetica', 'B', 20)
         self.set_text_color(*GREEN)
         self.set_xy(x, y + 6)
         self.cell(w, 10, value, align='C')
         # Label
-        self.set_font('LibSans', 'B', 6.5)
+        self.set_font('helvetica', 'B', 6.5)
         self.set_text_color(*GRAY)
         self.set_xy(x, y + 17)
         self.cell(w, 4, label.upper(), align='C')
         if sub:
-            self.set_font('LibSans', '', 6)
+            self.set_font('helvetica', '', 6)
             self.set_text_color(80, 80, 80)
             self.set_xy(x, y + 22)
             self.cell(w, 4, sub, align='C')
@@ -149,11 +146,11 @@ class MagazinePDF(FPDF):
         self.set_fill_color(0, 20, 30)
         self.set_draw_color(0, 60, 80)
         # Draw box after calculating height
-        self.set_font('LibSans', 'B', 9)
+        self.set_font('helvetica', 'B', 9)
         self.set_text_color(*CYAN)
         self.set_x(22)
         self.cell(166, 5, title, ln=True)
-        self.set_font('LibSans', '', 8.5)
+        self.set_font('helvetica', '', 8.5)
         self.set_text_color(180, 180, 180)
         self.set_x(22)
         self.multi_cell(166, 4.5, text, align='J')
@@ -173,7 +170,7 @@ class MagazinePDF(FPDF):
         self.image(path, x=x, y=self.get_y(), w=width)
         img_h = width * 0.55  # approximate
         if caption:
-            self.set_font('LibSans', '', 7)
+            self.set_font('helvetica', '', 7)
             self.set_text_color(80, 80, 80)
             self.set_xy(20, self.get_y() + img_h)
             self.cell(170, 4, caption.upper(), align='C')
@@ -184,7 +181,7 @@ class MagazinePDF(FPDF):
         col_w = 170 / len(headers)
         # Header
         self.set_fill_color(25, 25, 45)
-        self.set_font('LibSans', 'B', 7.5)
+        self.set_font('helvetica', 'B', 7.5)
         self.set_text_color(*CYAN)
         self.set_x(20)
         for h in headers:
@@ -195,11 +192,11 @@ class MagazinePDF(FPDF):
             if i == highlight_row:
                 self.set_fill_color(0, 30, 40)
                 self.set_text_color(*WHITE)
-                self.set_font('LibSans', 'B', 8)
+                self.set_font('helvetica', 'B', 8)
             else:
                 self.set_fill_color(15, 15, 20) if i % 2 == 0 else self.set_fill_color(18, 18, 25)
                 self.set_text_color(190, 190, 190)
-                self.set_font('LibSans', '', 8)
+                self.set_font('helvetica', '', 8)
             self.set_x(20)
             for cell in row:
                 self.cell(col_w, 6.5, '  ' + str(cell), border=0, fill=True)
@@ -221,11 +218,11 @@ def build_magazine():
     # Top bar
     pdf.set_fill_color(*RED)
     pdf.rect(0, 0, 210, 12, 'F')
-    pdf.set_font('LibSans', 'B', 20)
+    pdf.set_font('helvetica', 'B', 20)
     pdf.set_text_color(*WHITE)
     pdf.set_xy(10, 2)
     pdf.cell(120, 8, 'ENERGIVANU INSIGHTS', ln=False)
-    pdf.set_font('LibSans', '', 7)
+    pdf.set_font('helvetica', '', 7)
     pdf.set_text_color(220, 220, 220)
     pdf.set_xy(130, 2)
     pdf.cell(70, 4, 'SPECIAL EDITION', align='R', ln=False)
@@ -233,19 +230,19 @@ def build_magazine():
     pdf.cell(70, 4, 'JUNE 2026  -  ENERGY & AI', align='R', ln=False)
 
     # Category tag
-    pdf.set_font('LibSans', 'B', 8)
+    pdf.set_font('helvetica', 'B', 8)
     pdf.set_text_color(*CYAN)
     pdf.set_xy(20, 80)
     pdf.cell(170, 5, 'EXCLUSIVE FEATURE', align='C')
 
     # Main headline
-    pdf.set_font('LibSans', 'B', 38)
+    pdf.set_font('helvetica', 'B', 38)
     pdf.set_text_color(*WHITE)
     pdf.set_xy(20, 95)
     pdf.multi_cell(170, 14, 'The Open-Source Engine\nThat Could Save $47B\nin Data Center Power', align='C')
 
     # Subline
-    pdf.set_font('LibSans', '', 12)
+    pdf.set_font('helvetica', '', 12)
     pdf.set_text_color(*GRAY)
     pdf.set_xy(30, 155)
     pdf.multi_cell(150, 7, 'How a 613,000-parameter neural network is rewriting the rules of GPU data center energy management  -  and why ERCOT just made it essential.', align='C')
@@ -255,11 +252,11 @@ def build_magazine():
     x_start = 20
     stat_w = 42
     for val, label in stats:
-        pdf.set_font('LibSans', 'B', 24)
+        pdf.set_font('helvetica', 'B', 24)
         pdf.set_text_color(*GREEN)
         pdf.set_xy(x_start, 185)
         pdf.cell(stat_w, 10, val, align='C')
-        pdf.set_font('LibSans', 'B', 6)
+        pdf.set_font('helvetica', 'B', 6)
         pdf.set_text_color(*DARK_GRAY)
         pdf.set_xy(x_start, 196)
         pdf.cell(stat_w, 4, label, align='C')
@@ -268,7 +265,7 @@ def build_magazine():
     # Bottom bar
     pdf.set_fill_color(15, 15, 15)
     pdf.rect(0, 270, 210, 27, 'F')
-    pdf.set_font('LibSans', '', 7)
+    pdf.set_font('helvetica', '', 7)
     pdf.set_text_color(80, 80, 80)
     pdf.set_xy(15, 278)
     pdf.cell(90, 4, 'github.com/mysterious75/energivanu2')
@@ -294,15 +291,15 @@ def build_magazine():
     ]
 
     for num, title, desc in toc_items:
-        pdf.set_font('LibSans', 'B', 18)
+        pdf.set_font('helvetica', 'B', 18)
         pdf.set_text_color(*CYAN)
         pdf.set_xy(20, y)
         pdf.cell(15, 8, num)
-        pdf.set_font('LibSans', 'B', 12)
+        pdf.set_font('helvetica', 'B', 12)
         pdf.set_text_color(*WHITE)
         pdf.set_xy(38, y)
         pdf.cell(130, 8, title)
-        pdf.set_font('LibSans', '', 8)
+        pdf.set_font('helvetica', '', 8)
         pdf.set_text_color(120, 120, 120)
         pdf.set_xy(38, y + 8)
         pdf.multi_cell(150, 4.5, desc)
@@ -351,11 +348,11 @@ def build_magazine():
     y_start = pdf.get_y()
     pdf.set_fill_color(*CYAN)
     pdf.rect(20, y_start, 2, 20, 'F')
-    pdf.set_font('LibSans', 'I', 13)
+    pdf.set_font('helvetica', 'I', 13)
     pdf.set_text_color(*CYAN)
     pdf.set_xy(28, y_start)
     pdf.multi_cell(155, 7, '"The grid doesn\'t need more data centers. It needs smarter data centers."')
-    pdf.set_font('LibSans', '', 8)
+    pdf.set_font('helvetica', '', 8)
     pdf.set_text_color(80, 80, 80)
     pdf.set_xy(28, pdf.get_y() + 2)
     pdf.cell(155, 4, ' -  Industry Analysis, 2026')
@@ -554,11 +551,11 @@ def build_magazine():
     y_cta = pdf.get_y() + 3
     pdf.set_fill_color(*RED)
     pdf.rect(20, y_cta, 170, 18, 'F')
-    pdf.set_font('LibSans', 'B', 14)
+    pdf.set_font('helvetica', 'B', 14)
     pdf.set_text_color(*WHITE)
     pdf.set_xy(20, y_cta + 3)
     pdf.cell(170, 7, 'Ready to Deploy?', align='C')
-    pdf.set_font('LibSans', '', 9)
+    pdf.set_font('helvetica', '', 9)
     pdf.set_text_color(220, 220, 220)
     pdf.set_xy(20, y_cta + 11)
     pdf.cell(170, 5, 'pip install energivanu  -  github.com/mysterious75/energivanu2  -  @VEDKUMAR98', align='C')
@@ -629,15 +626,15 @@ def build_magazine():
     ]
 
     for time, title, desc in roadmap:
-        pdf.set_font('LibSans', 'B', 10)
+        pdf.set_font('helvetica', 'B', 10)
         pdf.set_text_color(*CYAN)
         pdf.set_xy(20, y)
         pdf.cell(25, 6, time)
-        pdf.set_font('LibSans', 'B', 11)
+        pdf.set_font('helvetica', 'B', 11)
         pdf.set_text_color(*WHITE)
         pdf.set_xy(48, y)
         pdf.cell(120, 6, title)
-        pdf.set_font('LibSans', '', 8.5)
+        pdf.set_font('helvetica', '', 8.5)
         pdf.set_text_color(170, 170, 170)
         pdf.set_xy(48, y + 7)
         pdf.multi_cell(140, 4.5, desc)
@@ -659,7 +656,7 @@ def build_magazine():
     y_start = pdf.get_y() + 2
     pdf.set_fill_color(*CYAN)
     pdf.rect(20, y_start, 2, 18, 'F')
-    pdf.set_font('LibSans', 'I', 12)
+    pdf.set_font('helvetica', 'I', 12)
     pdf.set_text_color(*CYAN)
     pdf.set_xy(28, y_start)
     pdf.multi_cell(155, 6, '"We\'re not building a product. We\'re building the missing layer between AI and the grid."')
@@ -672,20 +669,20 @@ def build_magazine():
     # Avatar circle
     pdf.set_fill_color(0, 212, 255)
     pdf.ellipse(28, y + 5, 18, 18, 'F')
-    pdf.set_font('LibSans', 'B', 22)
+    pdf.set_font('helvetica', 'B', 22)
     pdf.set_text_color(10, 10, 10)
     pdf.set_xy(28, y + 8)
     pdf.cell(18, 12, 'V', align='C')
     # Info
-    pdf.set_font('LibSans', 'B', 13)
+    pdf.set_font('helvetica', 'B', 13)
     pdf.set_text_color(*WHITE)
     pdf.set_xy(52, y + 5)
     pdf.cell(100, 7, 'Ved Kumar')
-    pdf.set_font('LibSans', 'B', 7)
+    pdf.set_font('helvetica', 'B', 7)
     pdf.set_text_color(*CYAN)
     pdf.set_xy(52, y + 12)
     pdf.cell(100, 5, 'CREATOR & LEAD DEVELOPER')
-    pdf.set_font('LibSans', '', 8)
+    pdf.set_font('helvetica', '', 8)
     pdf.set_text_color(150, 150, 150)
     pdf.set_xy(52, y + 18)
     pdf.multi_cell(130, 4, 'Built from scratch on Kaggle free tier. Open-source advocate. Available for consulting, partnerships, and pilot deployments.')
@@ -694,11 +691,11 @@ def build_magazine():
     y = pdf.get_y() + 8
     pdf.set_fill_color(*RED)
     pdf.rect(20, y, 170, 16, 'F')
-    pdf.set_font('LibSans', 'B', 13)
+    pdf.set_font('helvetica', 'B', 13)
     pdf.set_text_color(*WHITE)
     pdf.set_xy(20, y + 2)
     pdf.cell(170, 6, 'Join the Revolution', align='C')
-    pdf.set_font('LibSans', '', 8)
+    pdf.set_font('helvetica', '', 8)
     pdf.set_text_color(220, 220, 220)
     pdf.set_xy(20, y + 9)
     pdf.cell(170, 5, 'github.com/mysterious75/energivanu2  -  @VEDKUMAR98  -  Open Source  -  AGPL-3.0', align='C')
