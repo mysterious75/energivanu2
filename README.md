@@ -21,7 +21,7 @@ Designed for AI data centers (colocation, on-prem, or cloud) running training or
 
 ## 🚀 Live Interactive Demo
 Try the interactive optimization simulator directly in your browser:
-👉 **[Interactive Web Simulation Dashboard](https://mysterious75.github.io/Energivanu/)** *(or open [docs/index.html](docs/index.html) locally)*
+👉 **[Interactive Web Simulation Dashboard](https://mysterious75.github.io/energivanu2/)** *(or open [docs/index.html](docs/index.html) locally)*
 
 ---
 
