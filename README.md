@@ -347,7 +347,7 @@ Looking to implement Energivanu within your production cluster? We provide dedic
 *   **On-Premise Closed-Loop Retraining**: Training scripts set up locally in your private cloud to ensure data confidentiality.
 *   **BESS Custom Drivers**: Custom interfaces connecting MPC controllers to specific battery storage vendors and BMS units.
 
-✉️ **Contact**: Open a GitHub Issue or reach out via Twitter/X: [@VEDKUMAR98](https://x.com/VEDKUMAR98) to discuss deployment, licensing, and professional consulting.
+✉️ **Contact**: Open a GitHub Issue, reach out via Twitter/X: [@VEDKUMAR98](https://x.com/VEDKUMAR98), or email us directly at **[support@voraprotocol.com](mailto:support@voraprotocol.com)** to discuss deployment, licensing, and professional consulting.
 
 ---
 
@@ -442,6 +442,6 @@ This repository is licensed under the **GNU Affero General Public License v3.0 (
 - ✅ Free to use, modify, and distribute for any purpose
 - ✅ Academic, research, personal, and commercial use — all permitted
 - ⚠️ If you modify and run this software as a network service (e.g., SaaS API), you must release your modified source code under AGPLv3
-- ⚠️ If you do not want AGPLv3 obligations (e.g., proprietary commercial deployment), a **separate commercial license is available** — contact via GitHub Issue or [@VEDKUMAR98](https://x.com/VEDKUMAR98)
+- ⚠️ If you do not want AGPLv3 obligations (e.g., proprietary commercial deployment), a **separate commercial license is available** — contact via GitHub Issue, [@VEDKUMAR98](https://x.com/VEDKUMAR98), or email **[support@voraprotocol.com](mailto:support@voraprotocol.com)**
 
 **Note on pretrained weights:** The real-data benchmark numbers (1.85% MAPE) were obtained using York University's H100 dataset (CC BY-NC-ND, research use). We do not redistribute the resulting checkpoint. A separately-trained demo model (synthetic data) is provided for out-of-box use. For production deployment, retrain on your own facility's data.
