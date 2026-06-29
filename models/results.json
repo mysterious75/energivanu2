@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-29T00:58:22.543886",
+  "status": "COMPLETE",
+  "device": "cpu",
+  "data_source": "MIT Supercloud Real Data",
+  "data_rows": 14910,
+  "train_samples": 2527,
+  "val_samples": 447,
+  "model_params": 338252,
+  "epochs": 20,
+  "best_val_loss": 0.000237,
+  "best_val_mape": 8438.51
+}

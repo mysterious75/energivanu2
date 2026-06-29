@@ -27,3 +27,6 @@ data/collections/
 kaggle.json
 data/kaggle/
 kaggle/push_notebook/
+kaggle/output/
+kaggle/pull/
+models/*.pt
