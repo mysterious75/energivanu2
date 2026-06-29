@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
-  <strong>Open-source ML toolkit for GPU data center power optimization.</strong>
+  <strong>The only open-source ML toolkit combining GPU power prediction, BESS MPC control, and phase staggering.</strong>
 </p>
 
-**Energivanu** is an open-source machine learning toolkit for GPU data center power optimization, validated at node-level scale with mathematical projections toward larger facility deployments. It predicts high-frequency power spikes, manages battery energy storage system (BESS) dispatch, and staggers distributed AI training phases to reduce peak demand charges and smooth utility grid loads.
+**Energivanu** is an open-source machine learning toolkit for GPU data center power optimization. While individual components exist in other tools (like Zeus or Phaidra), Energivanu provides a unique integration: it is the **only open-source toolkit that combines ML-based GPU power prediction, native BESS battery control, and phase-staggering cluster scheduling in a single package**.
 
 Designed for AI data centers (colocation, on-prem, or cloud) running training or fine-tuning workloads on NVIDIA H100/A100 clusters.
 
