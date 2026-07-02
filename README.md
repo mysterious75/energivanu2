@@ -131,8 +131,10 @@ See [`alibaba-training/`](alibaba-training/) for full training documentation.
 
 All 4 core system components validated in simulation on Kaggle T4 GPU. See [`validation_output/validation_report.json`](validation_output/validation_report.json) for full results.
 
-> ⚠️ **Validation Scope — Please Read Before Citing:**
-> All results below are **simulation-verified** on a single 8-GPU Kaggle node. No real BESS hardware, real ERCOT grid connection, or production multi-GPU cluster has been used. These are engineering benchmarks, not production deployment results.
+> ⚠️ **Validation Scope & Limitations — Please Read Before Citing:**
+> All results below are **simulation-verified** on a **single 8-GPU Kaggle node with idle GPU load** (26.3W baseline, 0% utilization). This means the validation demonstrates that the code runs without crashing and produces reasonable outputs — it does **NOT** validate prediction accuracy under real production workloads. No real BESS hardware, real ERCOT grid connection, or production multi-GPU cluster has been used. These are engineering benchmarks, not production deployment results.
+>
+> **Key caveat:** The 1.85% MAPE claim was measured on a 15% holdout split of the York University H100 dataset (idle GPU). Real workload MAPE on active training GPUs will be significantly higher (50-100%+ range), and this metric should NOT be cited as representative of production performance.
 
 | Component | Simulation Status | Key Result |
 |-----------|-------------------|------------|

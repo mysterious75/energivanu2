@@ -55,7 +55,7 @@ Energivanu operates as a closed-loop control system divided into three primary l
 ┌─────────────────────────────────────────────────────────────┐
 │             Energivanu Optimization Engine                  │
 │    • Power Prediction Model (EnergivanuPEB, 613K params)     │
-│    • Predictive Battery Control (MPC via Convex Solver)      │
+│    • Predictive Battery Control (MPC via Heuristic Trajectory Optimization)      │
 │    • Cluster Phase Staggering (All-Reduce Offset Planner)    │
 └──────┬─────────────────────────────────┬────────────────────┘
                        │                                 │
@@ -77,7 +77,7 @@ To comply with the PCLR basepoint instructions, Energivanu parallelizes model in
 | 1 | Signal Parser | Ingest & validate SCED/OpenADR message | $< 1\text{ s}$ |
 | 2 | Decision Classifier | Map signal to operational state (Normal, Moderate, Critical) | $< 1\text{ s}$ |
 | 3 | Predictive Regressor | Multi-step forward horizon power prediction (EnergivanuPEB) | $< 2\text{ s}$ |
-| 4 | Optimizer | Solve BESS Model Predictive Control (MPC) quadratic program | $< 2\text{ s}$ |
+| 4 | Optimizer | Solve BESS Model Predictive Control (MPC) heuristic optimization | $< 2\text{ s}$ |
 | 5 | Phase Scheduler | Compute GPU communication staggering offsets | $< 1\text{ s}$ |
 | 6 | Hardware Control | Issue battery Modbus registers & coordinate GPU process blocks | $< 10\text{ s}$ |
 | **Total** | **System Loop** | **End-to-End Latency** | **$< 17\text{ s}$** |
@@ -115,7 +115,7 @@ The 15 input features are categorized below:
 15. `is_allreduce`: Binary indicator indicating active collective communication.
 
 ### 3.2 Battery Model Predictive Control (MPC)
-Energivanu uses Model Predictive Control to compute the optimal battery charging and discharging trajectories over a finite prediction horizon $H$.
+Energivanu uses a heuristic Model Predictive Control approach to compute battery charging and discharging trajectories over a finite prediction horizon $H$. The optimizer evaluates multiple candidate trajectories via grid search across proportional, constant, two-phase, and swing strategies, selecting the one with the lowest cost.
 
 #### Mathematical Formulation:
 $$\min_{\mathbf{u}} \sum_{k=1}^{H} \left[ Q(P_{\text{grid}, k} - P_{\text{target}, k})^2 + R u_k^2 + S(u_k - u_{k-1})^2 \right]$$
