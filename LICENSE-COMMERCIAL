@@ -1,7 +1,7 @@
 ===============================================================================
-                   ENERGIVANU COMMERCIAL LICENSE AGREEMENT
-                              Version 1.0
-                          Effective: July 2026
+                    ENERGIVANU COMMERCIAL LICENSE AGREEMENT
+                               Version 1.1
+                           Effective: July 2026
 ===============================================================================
 
 Copyright (C) 2026 Ved Kumar / VORAPROTOCOL
@@ -36,14 +36,39 @@ and deploy the Software without the obligations of the AGPL-3.0 license.
      models, configuration files, and any associated materials distributed
      at https://github.com/mysterious75/Energivanu.
 
-1.4  "Cluster" means a single logical deployment of the Software, regardless
-     of the number of GPU nodes managed by that deployment instance.
+1.4  "Cluster" means a single logical deployment of the Software managing
+     up to two hundred fifty-six (256) GPU nodes. Deployments exceeding
+     256 GPU nodes shall be counted as multiple clusters (e.g., 512 GPUs =
+     2 clusters, 1024 GPUs = 4 clusters). A "logical deployment" is defined
+     as a single instance of the Energivanu API server and associated
+     configuration, regardless of physical or cloud location.
 
 1.5  "Modification" means any alteration, adaptation, extension, or
      derivative work based on the Software.
 
 1.6  "Effective Date" means the date on which the Licensee's payment is
      received and confirmed by the Licensor.
+
+1.7  "Acceptance" means the Licensee's agreement to this Agreement through
+     one of the following methods:
+
+     (a)  Execution of a written agreement signed by both parties;
+     (b)  Online click-through acceptance during the purchase process;
+     (c)  Written confirmation via email from an authorized representative
+          of the Licensee; or
+     (d)  Payment of the applicable license fees, which shall constitute
+          acceptance of this Agreement.
+
+1.8  "Personal Data" means any data relating to an identified or identifiable
+     natural person, as defined under applicable data protection laws
+     (including but not limited to the General Data Protection Regulation
+     (GDPR), the Information Technology Act, 2000 (India), and other
+     applicable legislation).
+
+1.9  "Confidential Information" means any proprietary or confidential
+     information disclosed by one party to the other, including but not
+     limited to: Customer Data, pricing terms, technical specifications,
+     deployment configurations, and business strategies.
 
 
 ===============================================================================
@@ -132,6 +157,32 @@ and deploy the Software without the obligations of the AGPL-3.0 license.
      responsible for all taxes, duties, and levies arising from the
      purchase of a Commercial License.
 
+4.6  PAYMENT TERMS.
+
+     (a)  Payment Due Date. License fees are due within thirty (30) days of
+          the Effective Date and annually thereafter on the anniversary of
+          the Effective Date.
+
+     (b)  Payment Methods. Payments shall be made via bank transfer, credit
+          card, or other methods accepted by the Licensor. All payments shall
+          be in United States Dollars (USD), converted at the exchange rate
+          prevailing on the invoice date.
+
+     (c)  Late Payments. Payments not received within thirty (30) days of
+          the due date shall accrue interest at a rate of 1.5% per month
+          (or the maximum rate permitted by applicable law, whichever is
+          lower).
+
+     (d)  Suspension for Non-Payment. If payment remains outstanding for
+          more than sixty (60) days, the Licensor may, upon written notice,
+          suspend support services and access to any licensed materials.
+          If payment remains outstanding for ninety (90) days, the Licensor
+          may terminate this Agreement in accordance with Section 6.3.
+
+     (e)  Refunds. License fees are non-refundable except as expressly
+          provided in this Agreement. No refunds or credits will be issued
+          for partial subscription periods.
+
 
 ===============================================================================
 5. SUPPORT
@@ -156,8 +207,28 @@ and deploy the Software without the obligations of the AGPL-3.0 license.
      - Support Channel:  Dedicated support engineer.
      - Response SLA:     4-hour response time, 24/7.
      - Includes:         Custom BESS driver integrations, custom telemetry
-                         pipeline adapters, on-site (or remote) deployment
-                         assistance, dedicated Slack/Teams channel.
+                          pipeline adapters, on-site (or remote) deployment
+                          assistance, dedicated Slack/Teams channel.
+
+5.5  SERVICE LEVEL AGREEMENT (SLA).
+
+     (a)  Uptime Commitment. For Enterprise and Hyperscale tiers, the
+          Licensor commits to maintaining 99.5% uptime for support services
+          (email, ticketing system) during business hours, excluding scheduled
+          maintenance with 48 hours' advance notice.
+
+     (b)  SLA Credits. If uptime falls below 99.5% in any calendar month,
+          the Licensee shall receive a credit equal to 10% of the monthly
+          license fee for each full percentage point below 99.5%, up to a
+          maximum of 50% of the monthly fee. Credits shall be applied to the
+          next renewal invoice.
+
+     (c)  Exclusions. SLA commitments do not apply to: (i) scheduled
+          maintenance windows (with 48 hours' notice); (ii) force majeure
+          events; (iii) issues caused by Licensee's infrastructure,
+          configurations, or modifications; (iv) third-party service
+          failures beyond the Licensor's control; or (v) issues arising
+          from beta or pre-release features.
 
 
 ===============================================================================
@@ -217,6 +288,15 @@ and deploy the Software without the obligations of the AGPL-3.0 license.
      BATTERY DISPATCH, AND GRID INTEGRATION COMPONENTS HAVE BEEN VALIDATED
      IN SIMULATION ONLY AND HAVE NOT BEEN CERTIFIED FOR USE IN
      SAFETY-CRITICAL GRID INFRASTRUCTURE WITHOUT INDEPENDENT VERIFICATION.
+
+8.4  PRE-RELEASE SOFTWARE. The Licensee acknowledges that the Software is
+     currently in pre-release/beta status and may contain bugs, errors, or
+     limitations. The Software has not been validated for use in
+     safety-critical applications, including but not limited to: grid
+     infrastructure control, power distribution systems, emergency response
+     systems, or life-safety equipment. The Licensee assumes all risks
+     associated with deployment in production environments. This section
+     shall be updated or removed upon the formal release of version 1.0.
 
 
 ===============================================================================
@@ -288,6 +368,166 @@ and deploy the Software without the obligations of the AGPL-3.0 license.
 
 12.5 ASSIGNMENT. The Licensee may not assign or transfer this Agreement
      without the prior written consent of the Licensor.
+
+12.6 FORCE MAJEURE. Neither party shall be liable for any failure or delay
+     in performing its obligations under this Agreement (other than payment
+     obligations) to the extent such failure or delay results from causes
+     beyond the reasonable control of the affected party, including but not
+     limited to: acts of God, natural disasters, pandemics, epidemics, war,
+     terrorism, civil unrest, government actions, strikes, labor disputes,
+     power failures, internet outages, or failures of third-party service
+     providers. The affected party shall notify the other party promptly and
+     shall use reasonable efforts to mitigate the impact of such event.
+
+12.7 DATA PROTECTION AND PRIVACY.
+
+     (a)  Customer Data. All data collected, processed, or generated by the
+          Software from the Licensee's systems, including but not limited to
+          GPU telemetry, power consumption data, workload profiles, and
+          operational metrics ("Customer Data"), shall remain the exclusive
+          property of the Licensee.
+
+     (b)  No Unauthorized Collection. The Licensor shall not collect,
+          transmit, store, or otherwise process any Customer Data unless
+          explicitly authorized in writing by the Licensee for the purpose
+          of providing support services under this Agreement.
+
+     (c)  Data Processing. Where the Licensor acts as a data processor on
+          behalf of the Licensee (as data controller), the terms of this
+          Section 12.7 shall constitute a data processing agreement in
+          compliance with applicable data protection laws, including:
+          (i) Regulation (EU) 2016/679 (General Data Protection Regulation
+          — GDPR); (ii) the UK Data Protection Act 2018 and UK GDPR;
+          (iii) the California Consumer Privacy Act (CCPA/CPRA);
+          (iv) the Information Technology Act, 2000 and IT Rules, 2011
+          (India); (v) the Singapore Personal Data Protection Act (PDPA);
+          (vi) the Personal Information Protection Law (PIPL) of China;
+          (vii) the Lei Geral de Proteção de Dados (LGPD) of Brazil; and
+          (viii) any other applicable data protection legislation.
+
+     (d)  Data Security. The Licensor shall implement and maintain reasonable
+          technical and organizational measures to protect Customer Data
+          against unauthorized access, loss, destruction, or alteration,
+          including encryption in transit (TLS 1.2+) and at rest, access
+          controls, and regular security assessments.
+
+     (e)  Data Breach Notification. The Licensor shall notify the Licensee
+          without undue delay (and in any event within 72 hours) upon
+          becoming aware of any actual or suspected data breach involving
+          Customer Data.
+
+     (f)  Data Retention and Deletion. Upon termination or expiration of
+          this Agreement, the Licensor shall delete or return all Customer
+          Data within ninety (90) days, unless retention is required by
+          applicable law.
+
+     (g)  Cross-Border Transfers. To the extent Customer Data is transferred
+          across national borders, both parties shall ensure such transfers
+          comply with applicable data protection laws, including the
+          Standard Contractual Clauses (SCCs) under GDPR where applicable.
+
+     (h)  Compliance. Both parties shall comply with all applicable data
+          protection and privacy laws. The Licensee represents that it has
+          obtained all necessary consents and has a lawful basis for
+          processing any Personal Data that may be processed through the
+          Software.
+
+12.8 COMPLIANCE AUDIT.
+
+     (a)  The Licensor shall have the right, upon thirty (30) days' written
+          notice and no more than once per calendar year, to audit the
+          Licensee's use of the Software to verify compliance with this
+          Agreement, including but not limited to cluster count and revenue
+          tier eligibility.
+
+     (b)  Such audit shall be conducted during the Licensee's normal business
+          hours, shall not unreasonably interfere with the Licensee's
+          operations, and shall be limited to verifying the number of
+          clusters deployed and the Licensee's annual gross revenue.
+
+     (c)  The Licensor shall bear the cost of such audit unless the audit
+          reveals underpayment of more than five percent (5%) of the fees
+          due, in which case the Licensee shall reimburse the Licensor for
+          the reasonable cost of the audit and shall promptly pay any
+          additional fees due plus interest as set forth in Section 4.6(c).
+
+12.9 EXPORT CONTROL. The Licensee acknowledges that the Software may be
+     subject to export control laws and regulations, including but not
+     limited to the Foreign Trade (Development and Regulation) Act, 1992
+     (India), India's SCOMET (Special Chemicals, Organisms, Materials,
+     Equipment and Technologies) list, the U.S. Export Administration
+     Regulations (EAR), and the Wassenaar Arrangement. The Licensee shall
+     not export, re-export, or transfer the Software, directly or
+     indirectly, to any prohibited destinations, entities, or persons
+     (including those on sanctions lists maintained by the UN, India,
+     the United States, the EU, or the UK) without obtaining all required
+     authorizations from applicable governmental authorities. The Licensee
+     represents that it is not: (a) located in a country subject to
+     comprehensive sanctions; (b) listed on any restricted party list;
+     or (c) using the Software for any prohibited end use, including the
+     design, development, or production of nuclear, chemical, biological
+     weapons, or missile systems.
+
+12.10 INDEMNIFICATION.
+
+     (a)  By Licensor. The Licensor shall indemnify, defend, and hold
+          harmless the Licensee from and against any third-party claims,
+          damages, liabilities, and expenses (including reasonable legal
+          fees) arising from allegations that the Software, as provided by
+          the Licensor, infringes any patent, copyright, trade secret, or
+          other intellectual property right.
+
+     (b)  By Licensee. The Licensee shall indemnify, defend, and hold
+          harmless the Licensor from and against any third-party claims,
+          damages, liabilities, and expenses (including reasonable legal
+          fees) arising from: (i) the Licensee's use of the Software in
+          violation of this Agreement or applicable law; (ii) modifications
+          or derivative works created by the Licensee; or (iii) the
+          Licensee's products or services that incorporate the Software.
+
+     (c)  Process. The indemnified party shall: (i) promptly notify the
+          indemnifying party in writing of any claim subject to
+          indemnification; (ii) grant the indemnifying party sole control
+          of the defense and settlement of such claim; and (iii) provide
+          reasonable cooperation and assistance at the indemnifying party's
+          reasonable request and expense.
+
+12.11 NOTICES. All notices required or permitted under this Agreement shall
+      be in writing and shall be deemed given when: (a) delivered personally;
+      (b) sent by confirmed email to the addresses specified in Section 13;
+      (c) sent by certified or registered mail, return receipt requested,
+      postage prepaid; or (d) sent by a recognized overnight courier service.
+      Either party may change its notice address by providing written notice
+      to the other party in accordance with this Section.
+
+12.12 RELATIONSHIP OF PARTIES. This Agreement does not create a partnership,
+      joint venture, agency, franchise, or employment relationship between
+      the parties. Neither party has the authority to bind the other or to
+      make any representations or warranties on behalf of the other. Each
+      party is an independent contractor.
+
+12.13 SURVIVAL. The following provisions shall survive termination or
+      expiration of this Agreement: Section 2.2 (License Scope), Section 3
+      (Restrictions), Section 7 (Intellectual Property), Section 8 (Warranty
+      Disclaimer), Section 9 (Limitation of Liability), Section 10
+      (Confidentiality), Section 11 (Governing Law and Dispute Resolution),
+      Section 12.7 (Data Protection and Privacy), Section 12.8 (Compliance
+      Audit), Section 12.9 (Export Control), Section 12.10 (Indemnification),
+      Section 12.11 (Notices), and Section 12.12 (Relationship of Parties).
+
+12.14 ELECTRONIC SIGNATURES. This Agreement may be executed electronically,
+      and the parties agree that electronic signatures shall be given the
+      same legal effect as original handwritten signatures, in accordance
+      with the Information Technology Act, 2000 (India), the ESIGN Act
+      (United States), eIDAS Regulation (EU), and any other applicable
+      electronic signature laws.
+
+12.15 WAIVER OF CLASS ACTION AND JURY TRIAL. To the fullest extent permitted
+      by applicable law: (a) any dispute resolution proceedings shall be
+      conducted solely on an individual basis and not in a class, consolidated,
+      or representative action; and (b) each party irrevocably waives any
+      right to a trial by jury in any legal proceeding arising out of or
+      relating to this Agreement or the Software.
 
 
 ===============================================================================

@@ -6,6 +6,7 @@ All notable changes to Energivanu are documented here.
 
 ### Added
 - 103 tests (up from 13) covering API, BESS, grid, optimizer, scheduler, and telemetry
+- Commercial license v1.1: Acceptance clause, Force Majeure, Data Protection (GDPR/CCPA/PIPL/LGPD), Compliance Audit, Export Control, Indemnification, Payment Terms, SLA credits, Pre-Release disclaimer, Survival clause, E-signature recognition, Class action waiver
 - GPU Docker profile (`docker-compose --profile gpu up`)
 - `Dockerfile.gpu` for CUDA 12.4-based GPU inference
 - `CONTRIBUTING.md`, `CHANGELOG.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`
