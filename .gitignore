@@ -54,6 +54,13 @@ kaggle_results/validation_output/
 !README.md
 !WHITEPAPER.md
 !docs/WHITEPAPER.md
+!CONTRIBUTING.md
+!CHANGELOG.md
+!SECURITY.md
+!CODE_OF_CONDUCT.md
+!.github/ISSUE_TEMPLATE/bug_report.md
+!.github/ISSUE_TEMPLATE/feature_request.md
+!.github/PULL_REQUEST_TEMPLATE.md
 
 # Ignore local temporary image files
 *.jfif

@@ -8,6 +8,8 @@
   <a href="magazine/Energivanu_Insights_Magazine.pdf"><img src="https://img.shields.io/badge/magazine-pdf-red" alt="Magazine"></a>
   <a href="magazine/LEGAL_COMPLIANCE.md"><img src="https://img.shields.io/badge/legal-compliant-brightgreen" alt="Legal"></a>
   <a href="validation_output/validation_report.json"><img src="https://img.shields.io/badge/validation-4%2F4%20gaps%20passed-brightgreen" alt="Validation"></a>
+  <a href="https://github.com/mysterious75/Energivanu/actions"><img src="https://img.shields.io/github/actions/workflow/status/mysterious75/Energivanu/ci.yml?branch=main" alt="CI"></a>
+  <a href="#tests"><img src="https://img.shields.io/badge/tests-103%20passing-brightgreen" alt="Tests"></a>
 </p>
 
 <p align="center">
@@ -19,6 +21,42 @@
 </p>
 
 ---
+
+## 🎯 TL;DR (For Busy People)
+
+**What it does:** Predicts GPU power consumption + optimizes battery dispatch  
+**Accuracy:** 21% MAPE on real Alibaba data (6,500 GPUs)  
+**Savings:** 15-25% reduction in peak demand charges  
+**License:** Free (AGPL-3.0) or $5K-25K/year (commercial)  
+**Deploy:** `docker-compose up -d`  
+
+```bash
+git clone https://github.com/mysterious75/Energivanu.git
+cd Energivanu
+docker-compose up -d
+curl http://localhost:8000/health
+```
+
+---
+
+## 🎯 Who Is This For?
+
+### ✅ Perfect For:
+- **AI Data Centers** running training/fine-tuning workloads
+- **Colocation Providers** wanting to reduce peak demand charges
+- **University HPC Centers** optimizing GPU cluster energy
+- **Crypto→AI Pivot Companies** managing power costs
+- **Researchers** studying GPU energy optimization
+
+### ❌ Not For:
+- Small GPU setups (&lt;8 GPUs) — overhead not worth it
+- Inference-only workloads — power patterns too stable
+- Facilities without BESS (battery storage) — can't optimize dispatch
+- Windows environments — Linux/Docker required
+
+---
+
+## 💰 ROI Calculator — Estimated Annual Savings
 
 ## 💰 ROI Calculator — Estimated Annual Savings
 
@@ -210,7 +248,7 @@ Energivanu/
 │   └── data_sources.yaml             # Data source registry with license info
 ├── kaggle/                            # Kaggle notebooks
 ├── scripts/                           # CLI scripts
-├── tests/                             # Test suite (13 tests passing)
+├── tests/                             # Test suite (103 tests passing, 8 skipped)
 ├── models/                            # Model checkpoints & results
 ├── validation_output/                 # Kaggle gap validation output
 ├── alibaba-training/                  # Alibaba training documentation
