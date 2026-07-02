@@ -9,7 +9,8 @@
   <a href="magazine/LEGAL_COMPLIANCE.md"><img src="https://img.shields.io/badge/legal-compliant-brightgreen" alt="Legal"></a>
   <a href="validation_output/validation_report.json"><img src="https://img.shields.io/badge/validation-4%2F4%20gaps%20passed-brightgreen" alt="Validation"></a>
   <a href="https://github.com/mysterious75/Energivanu/actions"><img src="https://img.shields.io/github/actions/workflow/status/mysterious75/Energivanu/ci.yml?branch=main" alt="CI"></a>
-  <a href="#tests"><img src="https://img.shields.io/badge/tests-103%20passing-brightgreen" alt="Tests"></a>
+  <a href="#project-structure"><img src="https://img.shields.io/badge/tests-103%20passing-brightgreen" alt="Tests"></a>
+  <a href="src/energivanu/distributed.py"><img src="https://img.shields.io/badge/ddp-torchrun%20ready-blue" alt="DDP"></a>
 </p>
 
 <p align="center">
@@ -55,8 +56,6 @@ curl http://localhost:8000/health
 - Windows environments — Linux/Docker required
 
 ---
-
-## 💰 ROI Calculator — Estimated Annual Savings
 
 ## 💰 ROI Calculator — Estimated Annual Savings
 
@@ -222,6 +221,7 @@ Energivanu/
 │   ├── api.py                         # FastAPI REST server
 │   ├── cli.py                         # CLI commands (energivanu demo/serve)
 │   ├── config.py                      # YAML config loader with validation
+│   ├── distributed.py                 # Multi-GPU DDP training utilities (torchrun)
 │   ├── logging_config.py              # Structured logging (JSON + human-readable)
 │   ├── data.py                        # H100 data processor
 │   ├── train_commercial.py            # Commercial-safe training pipeline
@@ -341,6 +341,9 @@ curl -X POST http://localhost:8000/predict \
 
 # Start with optional monitoring sidecar
 docker-compose --profile monitoring up -d
+
+# Start with GPU-accelerated inference (requires NVIDIA Container Toolkit)
+docker-compose --profile gpu up -d
 ```
 
 ### Build from Source
@@ -460,11 +463,14 @@ Energivanu uses a **dual data strategy** to ensure all distributed model weights
 ### Reproducing Commercial-Safe Training
 
 ```bash
-# Train on commercial-safe data only
+# Train on commercial-safe data only (single GPU)
 python -m energivanu.train_commercial
 
 # Train with specific sources
 python -m energivanu.train_commercial --sources alibaba_gpu_trace kaggle_t4
+
+# Multi-GPU distributed training (requires torchrun)
+torchrun --nproc_per_node=4 -m energivanu.train_commercial --distributed
 
 # Export to ONNX for deployment
 python scripts/export_onnx.py --checkpoint models/checkpoints/commercial_best.pt
@@ -502,6 +508,10 @@ python3 build_docx.py          # Build DOCX
 | [WHITEPAPER.md](WHITEPAPER.md) | Technical whitepaper — PCLR compliance architecture |
 | [TECHNICAL_DOCUMENTATION.md](TECHNICAL_DOCUMENTATION.md) | Complete technical documentation |
 | [MODEL_CARD.md](MODEL_CARD.md) | Model architecture, training data, evaluation metrics, limitations |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute to Energivanu |
+| [CHANGELOG.md](CHANGELOG.md) | Version history and release notes |
+| [SECURITY.md](SECURITY.md) | Security policy and vulnerability reporting |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community guidelines |
 | [PROJECT_STATUS.md](PROJECT_STATUS.md) | Development progress and roadmap |
 | [FINAL_STATUS.md](FINAL_STATUS.md) | Final session status — all agents complete |
 | [VERIFICATION_REPORT.md](VERIFICATION_REPORT.md) | Benchmark verification report |
