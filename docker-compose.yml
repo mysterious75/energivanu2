@@ -1,10 +1,95 @@
-version: "3.8"
+# =============================================================================
+# Energivanu — Docker Compose Configuration
+# Production deployment with API server and optional monitoring sidecar
+# =============================================================================
+#
+# Quick Start:
+#   docker-compose up -d                          # Start API server
+#   docker-compose --profile monitoring up -d     # Start with monitoring
+#   docker-compose down                           # Stop all services
+#
+# Health Check:
+#   curl http://localhost:8000/health
+#
+# API Prediction:
+#   curl -X POST http://localhost:8000/predict \
+#     -H "Content-Type: application/json" \
+#     -d '{"power_trace": [100, 120, 115, 130, 125]}'
+#
+# =============================================================================
 
 services:
-  api:
-    build: .
+
+  # ---------------------------------------------------------------------------
+  # Primary API Server
+  # Serves the FastAPI REST endpoints for power prediction & BESS optimization
+  # ---------------------------------------------------------------------------
+  energivanu-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: energivanu-api
     ports:
       - "8000:8000"
+    volumes:
+      - ./config:/app/config:ro        # Configuration (read-only)
+      - ./models:/app/models:ro        # Model checkpoints (read-only)
+      - energivanu-logs:/app/logs      # Persistent log storage
     environment:
       - PYTHONUNBUFFERED=1
+      - ENERGIVANU_ENV=production
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "2.0"
+        reservations:
+          memory: 512M
+          cpus: "0.5"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    networks:
+      - energivanu-net
+
+  # ---------------------------------------------------------------------------
+  # Optional: Monitoring Sidecar
+  # Runs the CLI demo/monitoring mode for system verification
+  # Activate with: docker-compose --profile monitoring up -d
+  # ---------------------------------------------------------------------------
+  energivanu-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: energivanu-monitor
+    command: ["python", "-m", "energivanu.cli", "demo"]
+    profiles:
+      - monitoring
+    volumes:
+      - ./config:/app/config:ro
+      - ./models:/app/models:ro
+      - energivanu-logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENERGIVANU_ENV=production
+    restart: unless-stopped
+    networks:
+      - energivanu-net
+
+# =============================================================================
+# Persistent Volumes
+# =============================================================================
+volumes:
+  energivanu-logs:
+    driver: local
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  energivanu-net:
+    driver: bridge

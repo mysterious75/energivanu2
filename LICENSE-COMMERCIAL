@@ -1,0 +1,316 @@
+===============================================================================
+                   ENERGIVANU COMMERCIAL LICENSE AGREEMENT
+                              Version 1.0
+                          Effective: July 2026
+===============================================================================
+
+Copyright (C) 2026 Ved Kumar / VORAPROTOCOL
+All Rights Reserved.
+
+===============================================================================
+                              PREAMBLE
+===============================================================================
+
+The Energivanu software ("Software") is distributed under the GNU Affero
+General Public License version 3.0 (AGPL-3.0) as its default open-source
+license. The AGPL-3.0 requires that any modifications to the Software, or
+any software that incorporates the Software and is made available over a
+network (e.g., as a SaaS product), must also be released under the
+AGPL-3.0 license.
+
+This Commercial License Agreement ("Agreement") provides an alternative
+licensing option for organizations and individuals who wish to use, modify,
+and deploy the Software without the obligations of the AGPL-3.0 license.
+
+
+===============================================================================
+1. DEFINITIONS
+===============================================================================
+
+1.1  "Licensor" means Ved Kumar / VORAPROTOCOL.
+
+1.2  "Licensee" means the individual or organization that has purchased a
+     Commercial License under this Agreement.
+
+1.3  "Software" means the Energivanu source code, documentation, pre-trained
+     models, configuration files, and any associated materials distributed
+     at https://github.com/mysterious75/Energivanu.
+
+1.4  "Cluster" means a single logical deployment of the Software, regardless
+     of the number of GPU nodes managed by that deployment instance.
+
+1.5  "Modification" means any alteration, adaptation, extension, or
+     derivative work based on the Software.
+
+1.6  "Effective Date" means the date on which the Licensee's payment is
+     received and confirmed by the Licensor.
+
+
+===============================================================================
+2. GRANT OF LICENSE
+===============================================================================
+
+2.1  Subject to the terms of this Agreement and payment of the applicable
+     fees, the Licensor grants the Licensee a non-exclusive, non-transferable,
+     worldwide license to:
+
+     (a)  Use the Software in production environments without disclosing
+          source code modifications;
+
+     (b)  Modify the Software and incorporate Modifications into proprietary
+          products or internal tooling;
+
+     (c)  Deploy the Software as part of a proprietary SaaS, PaaS, or managed
+          service offering without releasing the source code to end users;
+
+     (d)  Embed the Software within proprietary applications distributed to
+          third parties, provided such distribution complies with the
+          restrictions in Section 3;
+
+     (e)  Use all pre-trained model weights, configuration files, and
+          documentation included in the Software for commercial purposes.
+
+2.2  The Commercial License is granted on a per-cluster, annual subscription
+     basis. Each distinct deployment of the Software requires a separate
+     license or an appropriately tiered license.
+
+
+===============================================================================
+3. RESTRICTIONS
+===============================================================================
+
+3.1  The Licensee shall NOT:
+
+     (a)  Sublicense, resell, lease, or otherwise transfer the Software or
+          this license to any third party without prior written consent
+          from the Licensor;
+
+     (b)  Remove, obscure, or alter any copyright notices, license headers,
+          or attribution statements in the Software;
+
+     (c)  Claim ownership of the Software, or represent that the Licensee
+          is the original author or sole developer of the Software;
+
+     (d)  Use the Software in any manner that violates applicable laws or
+          regulations, including but not limited to export control laws;
+
+     (e)  Use the Licensor's name, trademarks, or brand identity for
+          endorsement or promotional purposes without prior written consent.
+
+3.2  The Licensee must include the following attribution in any product or
+     service that incorporates the Software:
+
+         "Powered by Energivanu (https://github.com/mysterious75/Energivanu)"
+
+
+===============================================================================
+4. PRICING
+===============================================================================
+
+4.1  Community Tier
+     - Cost:       Free (no charge)
+     - License:    AGPL-3.0 (default open-source license)
+     - Terms:      All AGPL-3.0 obligations apply, including source code
+                   disclosure for network deployments.
+
+4.2  Startup Tier
+     - Eligibility: Organizations with less than $1,000,000 (USD) in
+                    annual gross revenue.
+     - Cost:       $5,000 (USD) per cluster per year.
+
+4.3  Enterprise Tier
+     - Eligibility: Organizations with $1,000,000 (USD) or more in annual
+                    gross revenue.
+     - Cost:       $25,000 (USD) per cluster per year.
+
+4.4  Hyperscale Tier
+     - Eligibility: Deployments managing 1,000 or more GPUs, or
+                    organizations requiring custom terms.
+     - Cost:       Custom pricing (contact Licensor for a quote).
+
+4.5  All prices are exclusive of applicable taxes. The Licensee is
+     responsible for all taxes, duties, and levies arising from the
+     purchase of a Commercial License.
+
+
+===============================================================================
+5. SUPPORT
+===============================================================================
+
+5.1  Community Tier
+     - Support Channel:  GitHub Issues only.
+     - Response SLA:     Best-effort (no guaranteed response time).
+
+5.2  Startup Tier
+     - Support Channel:  Email (support@voraprotocol.com).
+     - Response SLA:     72-hour response time during business days.
+     - Includes:         Deployment guidance, configuration assistance.
+
+5.3  Enterprise Tier
+     - Support Channel:  Priority email + scheduled video calls.
+     - Response SLA:     24-hour response time, 7 days a week.
+     - Includes:         Quarterly architecture review sessions,
+                         priority bug fixes, custom configuration support.
+
+5.4  Hyperscale Tier
+     - Support Channel:  Dedicated support engineer.
+     - Response SLA:     4-hour response time, 24/7.
+     - Includes:         Custom BESS driver integrations, custom telemetry
+                         pipeline adapters, on-site (or remote) deployment
+                         assistance, dedicated Slack/Teams channel.
+
+
+===============================================================================
+6. TERM AND TERMINATION
+===============================================================================
+
+6.1  This Agreement is effective from the Effective Date and continues for
+     a period of one (1) year ("Initial Term").
+
+6.2  The Agreement automatically renews for successive one-year periods
+     ("Renewal Terms") unless either party provides written notice of
+     non-renewal at least thirty (30) days before the end of the then-current
+     term.
+
+6.3  Either party may terminate this Agreement immediately upon written
+     notice if the other party materially breaches any provision of this
+     Agreement and fails to cure such breach within thirty (30) days of
+     receiving written notice of the breach.
+
+6.4  Upon termination:
+     (a)  The Licensee must cease all use of the Software under the
+          Commercial License terms;
+     (b)  The Licensee may continue to use the Software under the AGPL-3.0
+          license, subject to all AGPL-3.0 obligations;
+     (c)  No refunds will be issued for the remaining portion of any
+          prepaid term.
+
+
+===============================================================================
+7. INTELLECTUAL PROPERTY
+===============================================================================
+
+7.1  The Licensor retains all right, title, and interest in and to the
+     Software, including all intellectual property rights therein.
+
+7.2  This Agreement does not transfer ownership of the Software or any
+     intellectual property rights to the Licensee.
+
+7.3  Any Modifications created by the Licensee under the Commercial License
+     are owned by the Licensee, subject to the underlying intellectual
+     property rights of the Licensor in the original Software.
+
+
+===============================================================================
+8. WARRANTY DISCLAIMER
+===============================================================================
+
+8.1  THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS
+     OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+     MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+8.2  THE LICENSOR DOES NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE,
+     UNINTERRUPTED, OR THAT IT WILL MEET THE LICENSEE'S SPECIFIC
+     REQUIREMENTS.
+
+8.3  THE LICENSEE ACKNOWLEDGES THAT THE SOFTWARE'S POWER PREDICTION,
+     BATTERY DISPATCH, AND GRID INTEGRATION COMPONENTS HAVE BEEN VALIDATED
+     IN SIMULATION ONLY AND HAVE NOT BEEN CERTIFIED FOR USE IN
+     SAFETY-CRITICAL GRID INFRASTRUCTURE WITHOUT INDEPENDENT VERIFICATION.
+
+
+===============================================================================
+9. LIMITATION OF LIABILITY
+===============================================================================
+
+9.1  IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
+     SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED
+     TO LOSS OF PROFITS, DATA, OR BUSINESS OPPORTUNITIES, ARISING OUT OF
+     OR IN CONNECTION WITH THIS AGREEMENT OR THE USE OF THE SOFTWARE,
+     REGARDLESS OF THE THEORY OF LIABILITY.
+
+9.2  THE LICENSOR'S TOTAL AGGREGATE LIABILITY UNDER THIS AGREEMENT SHALL
+     NOT EXCEED THE TOTAL FEES PAID BY THE LICENSEE DURING THE TWELVE (12)
+     MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM.
+
+
+===============================================================================
+10. CONFIDENTIALITY
+===============================================================================
+
+10.1 Each party agrees to hold in confidence any proprietary or confidential
+     information disclosed by the other party during the course of this
+     Agreement, including but not limited to pricing terms, technical
+     specifications, and deployment configurations.
+
+10.2 Confidentiality obligations do not apply to information that:
+     (a)  Is or becomes publicly available through no fault of the
+          receiving party;
+     (b)  Was already known to the receiving party prior to disclosure;
+     (c)  Is independently developed by the receiving party; or
+     (d)  Is required to be disclosed by law or court order.
+
+
+===============================================================================
+11. GOVERNING LAW AND DISPUTE RESOLUTION
+===============================================================================
+
+11.1 This Agreement shall be governed by and construed in accordance with
+     the laws of India, without regard to its conflict of law provisions.
+
+11.2 Any disputes arising out of or in connection with this Agreement shall
+     first be attempted to be resolved through good-faith negotiation
+     between the parties.
+
+11.3 If negotiation fails, disputes shall be submitted to binding
+     arbitration in accordance with the Arbitration and Conciliation Act,
+     1996 (India), with the seat of arbitration in New Delhi, India.
+
+
+===============================================================================
+12. GENERAL PROVISIONS
+===============================================================================
+
+12.1 ENTIRE AGREEMENT. This Agreement constitutes the entire agreement
+     between the parties with respect to the subject matter hereof and
+     supersedes all prior or contemporaneous oral or written agreements.
+
+12.2 AMENDMENTS. This Agreement may only be amended by a written instrument
+     signed by both parties.
+
+12.3 SEVERABILITY. If any provision of this Agreement is held to be invalid
+     or unenforceable, the remaining provisions shall continue in full
+     force and effect.
+
+12.4 WAIVER. The failure of either party to enforce any right or provision
+     of this Agreement shall not constitute a waiver of such right or
+     provision.
+
+12.5 ASSIGNMENT. The Licensee may not assign or transfer this Agreement
+     without the prior written consent of the Licensor.
+
+
+===============================================================================
+13. CONTACT INFORMATION
+===============================================================================
+
+For commercial license inquiries, quotes, or support:
+
+     Email:    support@voraprotocol.com
+     GitHub:   https://github.com/mysterious75/Energivanu
+     Twitter:  https://x.com/VEDKUMAR98
+
+To initiate a commercial license purchase, send an email to
+support@voraprotocol.com with the subject line:
+
+     "Commercial License Inquiry - [Your Company Name]"
+
+Include the following information:
+     - Company name and registered address
+     - Estimated annual revenue (for tier determination)
+     - Number of GPU clusters to be licensed
+     - Desired start date
+
+===============================================================================
+                         END OF LICENSE AGREEMENT
+===============================================================================

@@ -41,9 +41,9 @@ all = ["energivanu[api,dashboard,bess,grid,dev]"]
 energivanu = "energivanu.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/mysterious75/energivanu2"
-Documentation = "https://github.com/mysterious75/energivanu2#readme"
-Repository = "https://github.com/mysterious75/energivanu2"
+Homepage = "https://github.com/mysterious75/Energivanu"
+Documentation = "https://github.com/mysterious75/Energivanu#readme"
+Repository = "https://github.com/mysterious75/Energivanu"
 
 [tool.setuptools.packages.find]
 where = ["src"]
